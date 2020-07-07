@@ -1,25 +1,34 @@
 var MyComponent = React.createClass({
     displayName: 'MyComponent',
-    render: function(){
-    var itemsCode=[];
-    this.props.items.forEach((a)=>{
-        var item=a;
-        var itemCode=
-            React.createElement('tr', {key:item.code, className:'Item'},
-            React.createElement('td',{className:'ItemName'}, item.itemName),
-            React.createElement('td', {className:'Pic'}, item.itemURL),
-            React.createElement('td',{className:'Price'}, item.itemPrice),
-            React.createElement('td',{className:'Numbers'}, item.itemNumbers),
-            React.createElement('td', null,
-            React.DOM.input( {type:'button',value:'Delete',onClick:this.deleteTd})));
-            itemsCode.push(itemCode);
-        })
-    
-        return React.DOM.div( {className:'Mycomponent'}, 
-        React.createElement("table",{
-            "className" : "table"
-        },
-        React.createElement('tbody',{className: 'Items'}, itemsCode), 
-        ))
+
+    colorChange: function(EO) {  
+        this.props.cbSelectedItemIdChanged(EO.target.id);
+      },
+
+    deleteItem: function(EO) { 
+        EO.preventDefault();
+        this.props.cbItemDelete(EO.target.id);
+      },
+
+      render: function() {
+        if(this.props.selectedItemId==this.props.code){
+           return  React.createElement('tr', {className:'Item2', defaultValue:this.props.selectedItemId, onClick:this.colorChange},
+        React.createElement('td',{className:'ItemName', id:this.props.code}, this.props.name),
+        React.createElement('td', {className:'Pic', id:this.props.code}, this.props.url),
+        React.createElement('td',{className:'Price', id:this.props.code}, this.props.price),
+        React.createElement('td',{className:'Numbers', id:this.props.code}, this.props.numbers),
+        React.createElement('td', {id:this.props.code},
+        React.DOM.input( {type:'button',value:'Delete', id:this.props.code, onClick:this.deleteItem})));
+        }
+        else{
+            return  React.createElement('tr', {className:'Item', defaultValue:this.props.selectedItemId, onClick:this.colorChange},
+            React.createElement('td',{className:'ItemName', id:this.props.code}, this.props.name),
+            React.createElement('td', {className:'Pic', id:this.props.code}, this.props.url),
+            React.createElement('td',{className:'Price', id:this.props.code}, this.props.price),
+            React.createElement('td',{className:'Numbers', id:this.props.code}, this.props.numbers),
+            React.createElement('td', {id:this.props.code},
+            React.DOM.input( {type:'button',value:'Delete', id:this.props.code, onClick:this.deleteItem})));
+              
+        }
     },
 })

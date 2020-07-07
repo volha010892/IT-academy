@@ -9,20 +9,29 @@
         <script src="https://unpkg.com/react@15/dist/react.js"></script> 
         <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
         <script src='MyComponent.js'></script>
+        <script src='ComponentTable.js'></script>
         <script src='MyShop.js'></script>
         <link rel='stylesheet' type='text/css' href='MyComponent.css'/>
         <script>
             var shopName= 'ishop';
+            var titles=[
+                {titleName:'Name', code:1},
+                {titleName:'Price', code:2},
+                {titleName:'URL', code:3},
+                {titleName:'Quantity', code:4},
+                {titleName:'Control', code:5}
+            ];
             var listItems=[
-                {itemName:'книга', code:1, itemPrice:20, itemURL:'http://loveread.me/img/photo_books/82040.jpg', itemNumbers:7},
-                {itemName:'картина', code:2, itemPrice:80, itemURL:'https://magicmag.net/image/cache/data/items-items/9999-2308/kartina-po-nomeram-zaliv-v-ispanii-900x900.jpg', itemNumbers:2},
-                {itemName:'ручка', code:3, itemPrice:3, itemURL:'https://www.ruchka.by/upload/iblock/eb1/1000_b_bu_3.jpg', itemNumbers:10},
-                {itemName:'тетрадь', code:4, itemPrice:15, itemURL:'https://static.detmir.st/media_out/471/839/1839471/1500/0.jpg', itemNumbers:3}
+                {itemName:'книга', id:1, code:1, itemPrice:20, itemURL:'http://loveread.me/img/photo_books/82040.jpg', itemNumbers:7},
+                {itemName:'картина', id:2, code:2, itemPrice:80, itemURL:'https://magicmag.net/image/cache/data/items-items/9999-2308/kartina-po-nomeram-zaliv-v-ispanii-900x900.jpg', itemNumbers:2},
+                {itemName:'ручка', id:3, code:3, itemPrice:3, itemURL:'https://www.ruchka.by/upload/iblock/eb1/1000_b_bu_3.jpg', itemNumbers:10},
+                {itemName:'тетрадь', id:4, code:4, itemPrice:15, itemURL:'https://static.detmir.st/media_out/471/839/1839471/1500/0.jpg', itemNumbers:3}
             ];
             ReactDOM.render(
-            React.createElement(MyComponent, {items:listItems}),
+            React.createElement(ComponentTable, {items:listItems, title:titles}),
             document.getElementById('container')
             );
+        
         </script>
 
     </body>
