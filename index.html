@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>ishop</title>
+    </head>
+    <body>
+        <div id='container'></div>
+        <script src="https://unpkg.com/react@15/dist/react.js"></script> 
+        <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script> 
+        <script src='MyComponent.js'></script>
+        <link rel='stylesheet' type='text/css' href='MyComponent.css'/>
+        <link rel='stylesheet' type='text/css' href='StringComp.css'/>
+        <link rel='stylesheet' type='text/css' href='MassString.css'/>
+        <script>
+            var items=[
+                {itemName:'частнопредпринимательский', code:1},
+                {itemName:'переосвидетельствоваться', code:2},
+                {itemName:'субстанционализироваться', code:3},
+                {itemName:'высокопревосходительство', code:4},
+                {itemName:'одиннадцатиклассница', code:5},
+                {itemName:'технико-экономического', code:6},
+                {itemName:'сельскохозяйственными', code:7},
+                {itemName:'межправительственная', code:8},
+                {itemName:'позднеиндустриальный', code:9},
+                {itemName:'сельскохозяйственный', code:10},
+                {itemName:'индустриализируется', code:11},
+                {itemName:'научно-технического', code:12},
+                {itemName:'переориентироваться', code:13},
+                {itemName:'систематизированный', code:14},
+                {itemName:'водородно-гелиевая', code:15},
+                {itemName:'научно-технический', code:16},
+                {itemName:'низкотемпературный', code:17},
+                {itemName:'постиндустриальное', code:18}
+            ];
+             ReactDOM.render(
+            React.createElement(MyComponent, {items:items}),
+            document.getElementById('container')
+            );
+        
+        </script>
+
+    </body>
+</html>
