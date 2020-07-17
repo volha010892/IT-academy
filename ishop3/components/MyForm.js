@@ -3,6 +3,18 @@ import PropTypes from 'prop-types';
 import DOM from 'react-dom-factories';
 import './MyForm.css';
 class MyForm extends React.Component{
+    static propTypes = {
+        cbTextChanged:PropTypes.func.isRequired,
+        cbSave:PropTypes.func.isRequired,
+        cbCancel:PropTypes.func.isRequired,
+        cbAdd:PropTypes.func.isRequired,
+        formId:PropTypes.number.isRequired,
+        cbName:PropTypes.string.isRequired,
+        cbPrice:PropTypes.number.isRequired,
+        cbUrl:PropTypes.string.isRequired,
+        cbQuantity:PropTypes.number.isRequired,
+        
+      }
     textChanged = (EO) => {  
         this.props.cbTextChanged(EO.target.value, EO.target.name);
       }
