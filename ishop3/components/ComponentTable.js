@@ -1,3 +1,10 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import DOM from 'react-dom-factories';
+import MyComponent from './MyComponent';
+import MyShop from './MyShop';
+import MyForm from './MyForm';
+
 class ComponentTable extends React.Component{
   static propTypes = {
     workMode: PropTypes.number,
@@ -197,4 +204,6 @@ class ComponentTable extends React.Component{
 }
 
 export default ComponentTable;
+  
+
   
