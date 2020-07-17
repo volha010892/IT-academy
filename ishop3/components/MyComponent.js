@@ -1,10 +1,19 @@
-﻿﻿import React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import DOM from 'react-dom-factories';
 import './MyComponent.css';
 
 class MyComponent extends React.Component{
-
+  static propTypes = {
+    cbSelectedItemIdChanged:PropTypes.func.isRequired,
+    cbItemDelete:PropTypes.func.isRequired,
+    cbItemEdit:PropTypes.func.isRequired,
+    code:PropTypes.number.isRequired,
+    name:PropTypes.string.isRequired,
+    url:PropTypes.string.isRequired,
+    price:PropTypes.number.isRequired,
+    numbers:PropTypes.number.isRequired,
+  }
     colorChange=(EO)=> { 
         this.props.cbSelectedItemIdChanged(EO.target.id);
       }
