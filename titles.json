@@ -1,0 +1,7 @@
+[
+    {"titleName":"Name", "code":1},
+    {"titleName":"Price", "code":2},
+    {"titleName":"URL", "code":3},
+    {"titleName":"Quantity", "code":4},
+    {"titleName":"Control", "code":5}
+]
