@@ -1,18 +1,20 @@
-﻿﻿﻿import React from 'react';
-import PropTypes from 'prop-types';
-import DOM from 'react-dom-factories';
-import MyComponent from './MyComponent';
-import MyShop from './MyShop';
-import MyForm from './MyForm';
-
 class ComponentTable extends React.Component{
   static propTypes = {
     workMode: PropTypes.number,
     selectedItemId: PropTypes.number,
-    selectedItemPrice: PropTypes.number,
-    selectedItemQuantity: PropTypes.number,
-    selectedItemName:PropTypes.string,
-    selectedItemUrl:PropTypes.string,
+    selectedItemPrice: PropTypes.number.isRequired,
+    selectedItemQuantity: PropTypes.number.isRequired,
+    selectedItemName:PropTypes.string.isRequired,
+    selectedItemUrl:PropTypes.string.isRequired,
+    textError:PropTypes.string.isRequired,
+    nameError:PropTypes.bool.isRequired,
+    priceError:PropTypes.bool.isRequired,
+    urlError:PropTypes.bool.isRequired,
+    quantityError:PropTypes.bool.isRequired,
+    fieldDisable:PropTypes.bool.isRequired,
+    lastId: PropTypes.number.isRequired,
+
+
   }
     state= {
         textError:this.props.textError,
@@ -22,10 +24,10 @@ class ComponentTable extends React.Component{
         quantityError:false,
         fieldDisable:false,
         selectedItemId:0,
-        selectedItemName:'',
-        selectedItemPrice:0,
-        selectedItemUrl:'',
-        selectedItemQuantity:0,
+        selectedItemName:'Name',
+        selectedItemPrice:100,
+        selectedItemUrl:'URL',
+        selectedItemQuantity:100,
         item: this.props.items,
         workMode:this.props.startWorkMode,
         lastId:this.props.items.length,
@@ -149,8 +151,7 @@ class ComponentTable extends React.Component{
             numbers={v.itemNumbers} code={v.code}
             selectedItemId={this.state.selectedItemId}
             cbSelectedItemIdChanged={this.selectedItemIdChanged} 
-            cbItemDelete={this.itemDelete} cbItemEdit={this.itemEdit}
-             item={this.state.item} 
+            cbItemDelete={this.itemDelete} cbItemEdit={this.itemEdit} 
              disable={this.state.fieldDisable}
           />
         );
