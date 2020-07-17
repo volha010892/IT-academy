@@ -1,0 +1,56 @@
+.Mycomponent .table
+{
+    border: solid 1px black;
+    border-collapse: collapse;
+}
+.Mycomponent .table .Items tr
+{
+    border: solid 1px black;
+}
+.Mycomponent .table .Items tr td
+{
+    border: solid 1px black;
+}
+.Mycomponent .table .Items
+{
+  padding-top: 5px;
+}
+
+.Mycomponent .table .Items .Item
+{
+  padding: 2px 0;
+}
+.Mycomponent .table .Items .Item2
+{
+  padding: 2px 0;
+}
+
+.Mycomponent .table .Items .Titles th{
+  border: solid 1px black;
+}
+.Mycomponent .table .Items .Item2{
+  background-color: red;
+}
+.Mycomponent .table .Items .Item .Count
+{
+  float: right;
+  width: 30px;
+  font-weight: bold;
+  text-align: right;
+}
+.Mycomponent .table .Items .Item2 .Count
+{
+  float: right;
+  width: 30px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.Mycomponent .table .Items .Item2 .ItemName
+{
+  margin-right: 30px;
+}
+.Mycomponent .table .Items .Item .ItemName
+{
+  margin-right: 30px;
+}
