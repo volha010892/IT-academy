@@ -5,7 +5,7 @@
   "main": "App.js",
   "scripts": {
     "build": ".\\node_modules\\.bin\\webpack",
-    "start": ".\\node_modules\\.bin\\lite-server",
+    "start": ".\\node_modules\\.bin\\webpack-dev-server --progress --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -18,7 +18,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
-    "lite-server": "^2.3.0",
+    "webpack-dev-server": "^2.9.4",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
