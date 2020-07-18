@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import DOM from 'react-dom-factories';
 class MyShop extends React.Component{
   static propTypes = {
-    code:PropTypes.number.isRequired,
-    titleName:PropTypes.string.isRequired,
+    code:PropTypes.number,
+    titleName:PropTypes.string,
   }
     render(){
         var titl=this.props.title.map( v =>
