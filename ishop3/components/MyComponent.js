@@ -8,11 +8,20 @@ class MyComponent extends React.Component{
     cbSelectedItemIdChanged:PropTypes.func.isRequired,
     cbItemDelete:PropTypes.func.isRequired,
     cbItemEdit:PropTypes.func.isRequired,
-    code:PropTypes.number.isRequired,
+    code:PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
     name:PropTypes.string.isRequired,
     url:PropTypes.string.isRequired,
-    price:PropTypes.number.isRequired,
-    numbers:PropTypes.number.isRequired,
+    price:PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
+    numbers:PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
   }
     colorChange=(EO)=> { 
         this.props.cbSelectedItemIdChanged(EO.target.id);
@@ -54,3 +63,4 @@ class MyComponent extends React.Component{
     }
 }
 export default MyComponent;
+
