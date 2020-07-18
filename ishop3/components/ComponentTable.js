@@ -9,17 +9,23 @@ class ComponentTable extends React.Component{
   static propTypes = {
     workMode: PropTypes.number,
     selectedItemId: PropTypes.number,
-    selectedItemPrice: PropTypes.number.isRequired,
-    selectedItemQuantity: PropTypes.number.isRequired,
-    selectedItemName:PropTypes.string.isRequired,
-    selectedItemUrl:PropTypes.string.isRequired,
+    selectedItemPrice: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
+    selectedItemQuantity: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
+    selectedItemName:PropTypes.string,
+    selectedItemUrl:PropTypes.string,
     textError:PropTypes.string.isRequired,
-    nameError:PropTypes.bool.isRequired,
-    priceError:PropTypes.bool.isRequired,
-    urlError:PropTypes.bool.isRequired,
-    quantityError:PropTypes.bool.isRequired,
-    fieldDisable:PropTypes.bool.isRequired,
-    lastId: PropTypes.number.isRequired,
+    nameError:PropTypes.bool,
+    priceError:PropTypes.bool,
+    urlError:PropTypes.bool,
+    quantityError:PropTypes.bool,
+    fieldDisable:PropTypes.bool,
+    lastId: PropTypes.number,
 
 
   }
@@ -81,9 +87,9 @@ class ComponentTable extends React.Component{
         }
         if(value2=='Quantity'){
           if(value==''){
-          this.setState({urlError:true});
+          this.setState({quantityError:true});
           }
-          else this.setState({urlError:false});
+          else this.setState({quantityError:false});
         this.setState({selectedItemQuantity:value});
         }
       }
