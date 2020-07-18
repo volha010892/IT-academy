@@ -8,11 +8,20 @@ class MyForm extends React.Component{
         cbSave:PropTypes.func.isRequired,
         cbCancel:PropTypes.func.isRequired,
         cbAdd:PropTypes.func.isRequired,
-        formId:PropTypes.number.isRequired,
+        formId:PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string
+          ]),
         cbName:PropTypes.string.isRequired,
-        cbPrice:PropTypes.number.isRequired,
+        cbPrice:PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string
+          ]),
         cbUrl:PropTypes.string.isRequired,
-        cbQuantity:PropTypes.number.isRequired,
+        cbQuantity:PropTypes.oneOfType([
+            PropTypes.number,
+            PropTypes.string
+          ]),
         
       }
     textChanged = (EO) => {  
