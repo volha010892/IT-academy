@@ -157,7 +157,7 @@ class ComponentTable extends React.Component{
       }
   
     render() {
-        var itemsCode=this.state.item.map( v =>
+      var itemsCode=this.state.item.map( v =>
           <MyComponent key={v.code}
             name={v.itemName} price={v.itemPrice} 
             url={v.itemURL} 
