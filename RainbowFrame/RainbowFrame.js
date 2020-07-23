@@ -10,7 +10,7 @@ class RainbowFrame extends React.Component {
       };
     render() {
         var itemsCode=this.props.colors;
-        var items=[];
+        var items;
         for(var i=0; i<itemsCode.length; i++){ 
         items=(
         <ColorFrame color={itemsCode[i-7]} key={i}>{
