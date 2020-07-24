@@ -9,8 +9,11 @@ class Frame extends React.Component {
           var item=[];
          items=this.props.text.split(/<\s*br\s*\/*>/);
           items.map((v, i)=>{
+              if(i!==items.length-1){
               item.push(v)
               item.push(<br key={i}></br>)
+              }
+              else  item.push(v)
           }
          )
         return (
