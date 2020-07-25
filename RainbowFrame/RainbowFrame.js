@@ -2,39 +2,34 @@
 import PropTypes from 'prop-types';
 
 import './RainbowFrame.css';
-import ColorFrame from './ColorFrame.js';
 
 class RainbowFrame extends React.Component {
     static propTypes = {
         colors: PropTypes.array.isRequired,
       };
+        
     render() {
-        var itemsCode=this.props.colors;
-        var items;
-        for(var i=0; i<itemsCode.length; i++){ 
-        items=(
-        <ColorFrame color={itemsCode[i-7]} key={i}>{
-        <ColorFrame color={itemsCode[i-6]} key={i}>{
-        <ColorFrame color={itemsCode[i-5]} key={i}>{
-        <ColorFrame color={itemsCode[i-4]} key={i}>{
-        <ColorFrame color={itemsCode[i-3]} key={i}>{
-        <ColorFrame color={itemsCode[i-2]} key={i}>{
-        <ColorFrame color={itemsCode[i-1]} key={i}>{
-        <ColorFrame color={itemsCode[i]} key={i}>{
-            this.props.children}
-            </ColorFrame>}
-            </ColorFrame>}
-            </ColorFrame>}
-            </ColorFrame>}
-            </ColorFrame>}
-            </ColorFrame>}
-            </ColorFrame>}
-            </ColorFrame>)
-        }
+
+        /*var item=this.props.children
+        this.props.colors.forEach(v=> {
+            item=<div style={{border:"solid 5px "+v,padding:"10px"}}>{item}</div>
+        })
         return ( 
-        <div>{items}</div>    
+        <div>{item} </div>   
         )
-        ;
+        ;*/
+
+        var item=this.props.colors;
+        if(item.length==0){
+          return this.props.children;
+        }
+        else {     
+            return(
+        <div style={{border:"solid 5px "+item[0],padding:"10px"}}>
+            <RainbowFrame colors={item.slice(1,item.length)}>
+            {this.props.children}</RainbowFrame></div>)
+        }
+        
         }
 }
     export default RainbowFrame;
