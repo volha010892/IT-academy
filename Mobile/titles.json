@@ -1,0 +1,9 @@
+[
+    {"titleName":"Фамилия", "code":1},
+    {"titleName":"Имя", "code":2},
+    {"titleName":"Отчество", "code":3},
+    {"titleName":"Баланс", "code":4},
+    {"titleName":"Статус", "code":5},
+    {"titleName":"Редактировать", "code":6},
+    {"titleName":"Удалить", "code":7}
+]

@@ -1,0 +1,21 @@
+﻿table{
+    border-collapse: collapse;
+}
+table th{
+    border: solid black 1px;
+}
+.MobileCompany
+{
+  width: 290px;
+  padding: 3px 7px;
+}
+
+.MobileCompanyName
+{
+  font-weight: bold;
+}
+
+.MobileCompanyClients
+{
+  padding-top: 5px;
+}
