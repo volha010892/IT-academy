@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './MobileClient.css';
+import {voteEvents} from './events';
 
 class MobileClient extends React.PureComponent {
 
   static propTypes = {
-    id: PropTypes.number.isRequired,
-      fam: PropTypes.string.isRequired,
-      im: PropTypes.string.isRequired,
-      otch: PropTypes.string.isRequired,
-    balance: PropTypes.number.isRequired,
+    id: PropTypes.number,
+      fam: PropTypes.string,
+      im: PropTypes.string,
+      otch: PropTypes.string,
+    balance: PropTypes.number,
   };
 
   state = {
@@ -18,8 +19,13 @@ class MobileClient extends React.PureComponent {
     otch: this.props.client.otch,
     balance: this.props.client.balance,
   };
-
-  componentWillReceiveProps = (newProps) => {
+editItem=(EO)=>{
+  voteEvents.emit('EditItemClicked', EO.target.id);
+}
+deleteItem=(EO)=>{
+  voteEvents.emit('DeleteItemClicked', EO.target.id);
+}
+componentWillReceiveProps = (newProps) => {
     this.setState({fam:newProps.client.fam, balance:newProps.client.balance});
   };
 
@@ -34,8 +40,8 @@ class MobileClient extends React.PureComponent {
         {(this.state.balance>0)?<td className='Active'>active</td>:
         <td className='Blocked'>blocked</td>}
        
-        <td> <input type="button" value="Редактировать" onClick={this.setBalance1} /></td>
-        <td> <input type="button" value="Удалить" onClick={this.setBalance1} /></td>
+        <td> <input type="button" value="Редактировать" id={this.props.client.id} onClick={this.editItem}/></td>
+        <td> <input type="button" value="Удалить" id={this.props.client.id} onClick={this.deleteItem}/></td>
         </tr>
     );
 

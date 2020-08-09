@@ -13,6 +13,7 @@ ReactDOM.render(
     name={companyName}
     clients={clientsArr}
     titles={titles}
+    startWorkMode={1}
   />
   , document.getElementById('container') 
 );
