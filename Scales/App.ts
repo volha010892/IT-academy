@@ -9,7 +9,7 @@ class Scales{
      this.items.push(_newItem);
     }
     getSumScale():number{
-        let sum=0;
+        let sum:number=0;
      for ( let testnum:number=0; testnum<this.items.length; testnum++ ) {
          let weight=this.items[testnum].getScale();
          sum+=weight;

@@ -4,8 +4,9 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import combinedReducer from '../redux/reducers.js';
-import store from '../store';
-
+import createStore from '../store';
+import Items from './Items'
+const store=createStore();
 //import CountriesList from '../core/CountriesList';
 
 //let store=createStore(combinedReducer, applyMiddleware(thunk));
@@ -13,11 +14,11 @@ import store from '../store';
 class MainPage extends React.PureComponent {
 
   render() {
-
+ 
     return (
-      <Provider store={store()}>
+      <Provider store={store}>
           <div>
-              <h1>Страны</h1>
+              <Items/>
           </div>
       </Provider>
     );
