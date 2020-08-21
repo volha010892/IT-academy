@@ -1,30 +1,28 @@
 class Scales{
-    items:Array<String>;
+    items:any;
 
     constructor() {
         this.items=[];
     }
 
-    add(_newItem:String):void{
+    add(_newItem:any):void{
      this.items.push(_newItem);
-     console.log(this.items);
     }
-    getSumScale():void{
+    getSumScale():number{
         let sum=0;
      for ( let testnum:number=0; testnum<this.items.length; testnum++ ) {
-         //let weight=this.items[testnum].getScale();
-         //sum+=weight;
+         let weight=this.items[testnum].getScale();
+         sum+=weight;
     }
-     console.log('Общий вес= '+sum);
+      return sum;
     }
-    getNameList():void{
-        let nameList:Array<String>;
+    getNameList():Array<String>{
+        let nameList:Array<String>=[];
         for ( let testnum:number=0; testnum<this.items.length; testnum++ ) {
-         //let name=this.items[testnum].getName();
+         let name=this.items[testnum].getName();
          nameList.push(name);
         }
-     console.log('Список товаров= '+nameList);
-
+        return nameList;
     }
 }
 class Product {
@@ -67,13 +65,16 @@ class Tomato extends Product {
 }
 
 let scale:Scales=new Scales();
-let apple1:Apple=new Apple('jnbj', 45);
-let tomato1:Tomato=new Tomato('fadhfh', 56);
-apple1.getScale();
-//scale.add(apple1);
-//scale.add(tomato1);
-scale.getNameList();
-scale.getSumScale();
+let apple1:Apple=new Apple('яблоко красное', 45);
+let apple2:Apple=new Apple('яблоко зеленое', 125);
+let tomato1:Tomato=new Tomato('томат малиновый', 56);
+scale.add(apple1);
+scale.add(apple2);
+scale.add(tomato1);
+let nameList:Array<String>=scale.getNameList();
+console.log('Список продуктов: '+ nameList)
+let sum:number=scale.getSumScale();
+console.log("Общий  вес: "+sum+ ' грамм');
 
 
 

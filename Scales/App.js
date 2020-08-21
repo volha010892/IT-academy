@@ -17,23 +17,22 @@ var Scales = /** @class */ (function () {
     }
     Scales.prototype.add = function (_newItem) {
         this.items.push(_newItem);
-        console.log(this.items);
     };
     Scales.prototype.getSumScale = function () {
         var sum = 0;
         for (var testnum = 0; testnum < this.items.length; testnum++) {
-            //let weight=this.items[testnum].getScale();
-            //sum+=weight;
+            var weight = this.items[testnum].getScale();
+            sum += weight;
         }
-        console.log('Общий вес= ' + sum);
+        return sum;
     };
     Scales.prototype.getNameList = function () {
-        var nameList;
+        var nameList = [];
         for (var testnum = 0; testnum < this.items.length; testnum++) {
-            //let name=this.items[testnum].getName();
-            nameList.push(name);
+            var name_1 = this.items[testnum].getName();
+            nameList.push(name_1);
         }
-        console.log('Список товаров= ' + nameList);
+        return nameList;
     };
     return Scales;
 }());
@@ -43,11 +42,10 @@ var Product = /** @class */ (function () {
         this.weight = _weight;
     }
     Product.prototype.getScale = function () {
-        console.log(this.weight);
         return this.weight;
     };
-    Product.prototype.getName = function (_name) {
-        return _name;
+    Product.prototype.getName = function () {
+        return this.name;
     };
     return Product;
 }());
@@ -66,11 +64,14 @@ var Tomato = /** @class */ (function (_super) {
     return Tomato;
 }(Product));
 var scale = new Scales();
-var apple1 = new Apple('jnbj', 45);
-var tomato1 = new Tomato('fadhfh', 56);
-apple1.getScale();
-//scale.add(apple1);
-//scale.add(tomato1);
-scale.getNameList();
-scale.getSumScale();
+var apple1 = new Apple('яблоко красное', 45);
+var apple2 = new Apple('яблоко зеленое', 125);
+var tomato1 = new Tomato('томат малиновый', 56);
+scale.add(apple1);
+scale.add(apple2);
+scale.add(tomato1);
+var nameList = scale.getNameList();
+console.log('Список продуктов: ' + nameList);
+var sum = scale.getSumScale();
+console.log("Общий  вес: " + sum + ' грамм');
 //# sourceMappingURL=App.js.map
