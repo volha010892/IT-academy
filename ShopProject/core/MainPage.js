@@ -10,7 +10,15 @@ const store=createStore();
 //import CountriesList from '../core/CountriesList';
 
 //let store=createStore(combinedReducer, applyMiddleware(thunk));
-
+setTimeout(function(){
+    store.dispatch({
+        type: 'SET_ITEMS',
+        payload:[{
+            id:0,
+            title: 'jhoihioh'
+        }]
+    })
+})
 class MainPage extends React.PureComponent {
 
   render() {

@@ -7,12 +7,12 @@ const initialState= {
 
 function itemsReducer (state=initialState, action){
    switch (action.type){
-       case SET_ITEMS:
+       case 'SET_ITEMS':
            return{
                ...state,
                items: action.payload 
            };
-        case ADD_ITEMS:
+        case 'ADD_ITEMS':
             return {
                 ...state,
                 items:[

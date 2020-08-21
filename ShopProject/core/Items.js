@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { countriesThunkAC } from "../redux/fetchThunk";
+//import { countriesThunkAC } from "../redux/fetchThunk";
 
 class Items extends React.PureComponent {
 
@@ -10,9 +10,11 @@ class Items extends React.PureComponent {
       };
 
     render() {
-   const {items}=this.props.items;
+   let item=this.props.items.items;
+
+   console.log(item)
       return (
-     <div></div>
+      <div>{item[0].title}</div>
       );
   
     }
