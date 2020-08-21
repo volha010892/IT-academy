@@ -1,11 +1,11 @@
 class Scales{
-    items:any;
+    items:Array<Product>;
 
     constructor() {
         this.items=[];
     }
 
-    add(_newItem:any):void{
+    add(_newItem:Product):void{
      this.items.push(_newItem);
     }
     getSumScale():number{
