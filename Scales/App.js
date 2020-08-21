@@ -11,35 +11,29 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
 var Scales = /** @class */ (function () {
     function Scales() {
-        this.sum = 0;
         this.items = [];
     }
     Scales.prototype.add = function (_newItem) {
-        this.items = __spreadArrays(this.items, [_newItem]);
+        this.items.push(_newItem);
         console.log(this.items);
     };
     Scales.prototype.getSumScale = function () {
-        for (var testnum in this.items) {
-            console.log(this.items[testnum]);
-            //this.items.getScale(this.items[testnum][1].weight);
-            //this.sum+=testnum.weight;  
+        var sum = 0;
+        for (var testnum = 0; testnum < this.items.length; testnum++) {
+            //let weight=this.items[testnum].getScale();
+            //sum+=weight;
         }
-        console.log('Общий вес= ' + this.sum);
+        console.log('Общий вес= ' + sum);
     };
     Scales.prototype.getNameList = function () {
-        for (var testnum in this.items) {
-            //this.nameList.push(this.name);  
+        var nameList;
+        for (var testnum = 0; testnum < this.items.length; testnum++) {
+            //let name=this.items[testnum].getName();
+            nameList.push(name);
         }
-        console.log('Общий вес= ' + this.nameList);
+        console.log('Список товаров= ' + nameList);
     };
     return Scales;
 }());
@@ -48,19 +42,18 @@ var Product = /** @class */ (function () {
         this.name = _name;
         this.weight = _weight;
     }
-    Product.prototype.getScale = function (_weight) {
-        this.weight = _weight;
+    Product.prototype.getScale = function () {
+        console.log(this.weight);
+        return this.weight;
     };
     Product.prototype.getName = function (_name) {
-        this.name = _name;
+        return _name;
     };
     return Product;
 }());
 var Apple = /** @class */ (function (_super) {
     __extends(Apple, _super);
     function Apple(name, weight) {
-        // конструктор класса-потомка должен вызвать 
-        // конструктор класса-предка
         return _super.call(this, name, weight) || this;
     }
     return Apple;
@@ -68,17 +61,16 @@ var Apple = /** @class */ (function (_super) {
 var Tomato = /** @class */ (function (_super) {
     __extends(Tomato, _super);
     function Tomato(name, weight) {
-        // конструктор класса-потомка должен вызвать 
-        // конструктор класса-предка
         return _super.call(this, name, weight) || this;
     }
     return Tomato;
 }(Product));
 var scale = new Scales();
-var apple1 = new Apple("rdyh", 546);
+var apple1 = new Apple('jnbj', 45);
 var tomato1 = new Tomato('fadhfh', 56);
-scale.add(apple1);
-scale.add(tomato1);
+apple1.getScale();
+//scale.add(apple1);
+//scale.add(tomato1);
 scale.getNameList();
 scale.getSumScale();
 //# sourceMappingURL=App.js.map
