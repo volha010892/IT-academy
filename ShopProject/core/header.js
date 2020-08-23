@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import logoSvg from './img/logo.svg';
 class Header extends React.PureComponent {
     render() {
       return (
         <div className="header">
         <div className="container">
           <div className="header__logo">
-            <img width="38" src="./img/logo.svg" alt="logo" />
+            <img width="38" src={logoSvg} alt="logo" />
             <div>
               <h1>Jewellery</h1>
               <p>самая стильная бижутерия</p>
