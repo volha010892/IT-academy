@@ -2,9 +2,8 @@
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import {Header, Items, Categories} from './components';
 import combinedReducer from '../redux/reducers.js';
-import Items from './Items';
-import Header from './Header';
 import './MainPage.css';
 
 let store = createStore(combinedReducer, applyMiddleware(thunk));
@@ -15,20 +14,11 @@ class MainPage extends React.PureComponent {
       <Provider store={store}>
         <div>
           <div className="wrapper">
-            <Header/>
+            <Header />
             <div className="content">
               <div className="container">
                 <div className="content__top">
-                  <div className="categories">
-                    <ul>
-                      <li className="active">Все</li>
-                      <li>Кольца</li>
-                      <li>Серьги</li>
-                      <li>Кулоны</li>
-                      <li>Браслеты</li>
-                      <li>Цепочки</li>
-                    </ul>
-                  </div>
+                  <Categories onClickItem={(name)=> console.log(name)} categories={['Кольца','Серьги','Кулоны','Браслеты','Цепочки']}/>
                   <div className="sort">
                     <div className="sort__label">
                       <svg
@@ -56,12 +46,12 @@ class MainPage extends React.PureComponent {
                 </div>
                 <h2 className="content__title">Все украшения</h2>
                 <div className="content__items">
-                     <Items />
-                      </div>
-                    </div>
-                  </div>
+                  <Items />
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
       </Provider>
     );
   }

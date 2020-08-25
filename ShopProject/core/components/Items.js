@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { itemsThunkAC } from "../redux/fetchThunk";
+import { itemsThunkAC } from "../../redux/fetchThunk";
 
 class Items extends React.PureComponent {
 

@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import logoSvg from './img/logo.svg';
+import logoSvg from '../img/logo.svg';
+import ButtonCart from './Button';
+
 class Header extends React.PureComponent {
-    render() {
-      return (
-        <div className="header">
+  render() {
+    return (
+      <div className="header">
         <div className="container">
           <div className="header__logo">
             <img width="38" src={logoSvg} alt="logo" />
@@ -14,7 +16,7 @@ class Header extends React.PureComponent {
             </div>
           </div>
           <div className="header__cart">
-            <a href="/cart.html" className="button button--cart">
+            <ButtonCart className="button button--cart">
               <span>520 ₽</span>
               <div className="button__delimiter"></div>
               <svg
@@ -46,12 +48,12 @@ class Header extends React.PureComponent {
                 />
               </svg>
               <span>3</span>
-            </a>
+            </ButtonCart>
           </div>
         </div>
       </div>
-       );
-    }
+    );
   }
-  
-  export default Header;
+}
+
+export default Header;
