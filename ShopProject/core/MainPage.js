@@ -2,9 +2,11 @@
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { Header, Items, Categories, Sort } from './components';
+import { Header } from './components';
+import {Home, Cart} from './pages';
 import combinedReducer from '../redux/reducers.js';
 import './MainPage.css';
+import { Route } from 'react-router-dom';
 
 let store = createStore(combinedReducer, applyMiddleware(thunk));
 
@@ -16,21 +18,8 @@ class MainPage extends React.PureComponent {
           <div className="wrapper">
             <Header />
             <div className="content">
-              <div className="container">
-                <div className="content__top">
-                  <Categories
-                    onClickItem={(name) => console.log(name)}
-                    categories={
-                      this.props.categories /*['Кольца','Серьги','Кулоны','Браслеты','Цепочки']*/
-                    }
-                  />
-                  <Sort items={['популярности','цене','алфавит']}/>
-                </div>
-                <h2 className="content__title">Все украшения</h2>
-                <div className="content__items">
-                  <Items />
-                </div>
-              </div>
+              <Route path="/" component={Home} exact/>
+              <Route path="/cart" component={Cart} exact/>
             </div>
           </div>
         </div>

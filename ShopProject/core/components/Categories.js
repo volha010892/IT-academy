@@ -18,7 +18,7 @@ function Categories({ categories, onClickItem }) {
             className={activeItem === index ? 'active' : ''}
             onClick={() => onSelectItem(index)}
             key={`${name}_${index}`}>
-            {name.titleName}
+            {name}
           </li>
         ))}
       </ul>
