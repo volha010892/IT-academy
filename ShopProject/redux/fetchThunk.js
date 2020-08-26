@@ -10,7 +10,7 @@ function itemsThunkAC(dispatch) {
     // ВЫПОЛНЯЕТ эту функцию и не пропускает её дальше, к редьюсерам.
     return function() {
         dispatch( itemsLoadingAC() );
-        isoFetch("http://fe.it-academy.by/Examples/net_city/countries.json")
+        isoFetch("https://ishop-57739.firebaseio.com/.json")
             .then( (response) => { // response - HTTP-ответ
                 if (!response.ok) {
                     let Err=new Error("fetch error " + response.status);
@@ -21,7 +21,7 @@ function itemsThunkAC(dispatch) {
                     return response.json();
             })
             .then( (data) => {
-                dispatch( itemsSetAC(data.rows) );
+                dispatch( itemsSetAC(data) );
             })
             .catch( (error) => {
                 console.error(error);

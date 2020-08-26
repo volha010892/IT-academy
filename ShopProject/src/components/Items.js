@@ -1,33 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import { itemsThunkAC } from "../../redux/fetchThunk";
+import { connect } from 'react-redux';
+import { itemsThunkAC } from '../../redux/fetchThunk';
 
 class Items extends React.PureComponent {
+  static propTypes = {
+    items: PropTypes.object.isRequired,
+  };
 
-    static propTypes = {
-        items: PropTypes.object.isRequired,
-      };
-    
-      componentDidMount() {
-        this.props.dispatch( itemsThunkAC(this.props.dispatch) );
-      }
+  componentDidMount() {
+    this.props.dispatch(itemsThunkAC(this.props.dispatch));
+  }
 
-    render() {
-        if ( this.props.items.status<=1 )
-      return "загрузка...";
+  render() {
+    if (this.props.items.status <= 1) return 'загрузка...';
 
-    if ( this.props.items.status===2 )
-      return "ошибка загрузки данных";
-
-      return (
-        this.props.items.data.map( (countryInfo,index) =><div key={index} className="jew-block">
+    if (this.props.items.status === 2) return 'ошибка загрузки данных';
+    console.log(this.props.items.data);
+    return ( 
+      this.props.items.data.map((item, index) => 
+      <div key={index} className="jew-block">
         <img
           className="jew-block__image"
-          src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+          src={item.url}
           alt="Jew"
         />
-        <h4 className="jew-block__title">{countryInfo[1]}</h4>
+        <h4 className="jew-block__title">{item.name}</h4>
         <div className="jew-block__selector">
           <ul>
             <li className="active">тонкое</li>
@@ -40,7 +38,7 @@ class Items extends React.PureComponent {
           </ul>
         </div>
         <div className="jew-block__bottom">
-          <div className="jew-block__price">от 395 ₽</div>
+          <div className="jew-block__price">от {item.price} ₽</div>
           <div className="button button--outline button--add">
             <svg
               width="12"
@@ -58,14 +56,12 @@ class Items extends React.PureComponent {
           </div>
         </div>
       </div>
-      ));
-  
-    }
-  
+    ));
   }
-  const mapStateToProps = function (state) {
-    return {
-      ...state
-    };
+}
+const mapStateToProps = function (state) {
+  return {
+    ...state,
   };
-  export default connect(mapStateToProps)(Items);
+};
+export default connect(mapStateToProps)(Items);

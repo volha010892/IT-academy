@@ -10,15 +10,16 @@ import { Route } from 'react-router-dom';
 
 let store = createStore(combinedReducer, applyMiddleware(thunk));
 
-class MainPage extends React.PureComponent {
-  render() {
+//class MainPage extends React.PureComponent {
+function MainPage(){
+  //render() {
     return (
       <Provider store={store}>
         <div>
           <div className="wrapper">
             <Header />
             <div className="content">
-              <Route path="/" component={Home} exact/>
+              <Route path="/" render={()=><Home items={name}/>} exact/>
               <Route path="/cart" component={Cart} exact/>
             </div>
           </div>
@@ -26,6 +27,6 @@ class MainPage extends React.PureComponent {
       </Provider>
     );
   }
-}
+//}
 
 export default MainPage;
