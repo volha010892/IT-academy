@@ -2,6 +2,7 @@ import React from 'react';
 import { Items, Categories, Sort } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsThunkAC } from '../../redux/fetchThunk';
+
 function Home() {
   const items = useSelector((state) => state.items);
   const dispatch = useDispatch();

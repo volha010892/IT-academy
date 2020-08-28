@@ -7,6 +7,7 @@ import {  Cart, Home } from './pages';
 import combinedReducer from '../redux/reducers.js';
 import './MainPage.css';
 import { Route } from 'react-router-dom';
+import { withRouter } from "react-router";
 
 let store = createStore(combinedReducer, applyMiddleware(thunk));
 
