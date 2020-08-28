@@ -3,30 +3,27 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Header } from './components';
-import {Home, Cart} from './pages';
+import { Home, Cart } from './pages';
 import combinedReducer from '../redux/reducers.js';
 import './MainPage.css';
 import { Route } from 'react-router-dom';
 
 let store = createStore(combinedReducer, applyMiddleware(thunk));
 
-//class MainPage extends React.PureComponent {
-function MainPage(){
-  //render() {
-    return (
-      <Provider store={store}>
-        <div>
-          <div className="wrapper">
-            <Header />
-            <div className="content">
-              <Route path="/" render={()=><Home items={name}/>} exact/>
-              <Route path="/cart" component={Cart} exact/>
-            </div>
+function MainPage() {
+  return (
+    <Provider store={store}>
+      <div>
+        <div className="wrapper">
+          <Header />
+          <div className="content">
+            <Route path="/" component={Home} exact />
+            <Route path="/cart" component={Cart} exact />
           </div>
         </div>
-      </Provider>
-    );
-  }
-//}
+      </div>
+    </Provider>
+  );
+}
 
 export default MainPage;
