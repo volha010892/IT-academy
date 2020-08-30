@@ -1,75 +1,126 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Scales = /** @class */ (function () {
     function Scales() {
-        this.items = [];
+        this.products = [];
     }
-    Scales.prototype.add = function (_newItem) {
-        this.items.push(_newItem);
+    Scales.prototype.addProduct = function (p) {
+        this.products.push(p);
     };
     Scales.prototype.getSumScale = function () {
-        var sum = 0;
-        for (var testnum = 0; testnum < this.items.length; testnum++) {
-            var weight = this.items[testnum].getScale();
-            sum += weight;
+        var sumScale = 0;
+        for (var testnum = 0; testnum < this.products.length; testnum++) {
+            sumScale += this.products[testnum].getScale();
         }
-        return sum;
+        return sumScale;
     };
     Scales.prototype.getNameList = function () {
         var nameList = [];
-        for (var testnum = 0; testnum < this.items.length; testnum++) {
-            var name_1 = this.items[testnum].getName();
+        for (var testnum = 0; testnum < this.products.length; testnum++) {
+            var name_1 = this.products[testnum].getName();
             nameList.push(name_1);
         }
         return nameList;
     };
     return Scales;
 }());
-var Product = /** @class */ (function () {
-    function Product(_name, _weight) {
+var Apple = /** @class */ (function () {
+    function Apple(_name, _weight) {
         this.name = _name;
         this.weight = _weight;
     }
-    Product.prototype.getScale = function () {
+    Apple.prototype.getScale = function () {
         return this.weight;
     };
-    Product.prototype.getName = function () {
+    Apple.prototype.getName = function () {
         return this.name;
     };
-    return Product;
-}());
-var Apple = /** @class */ (function (_super) {
-    __extends(Apple, _super);
-    function Apple(name, weight) {
-        return _super.call(this, name, weight) || this;
-    }
     return Apple;
-}(Product));
-var Tomato = /** @class */ (function (_super) {
-    __extends(Tomato, _super);
-    function Tomato(name, weight) {
-        return _super.call(this, name, weight) || this;
+}());
+var Tomato = /** @class */ (function () {
+    function Tomato(_name, _weight) {
+        this.name = _name;
+        this.weight = _weight;
     }
+    Tomato.prototype.getScale = function () {
+        return this.weight;
+    };
+    Tomato.prototype.getName = function () {
+        return this.name;
+    };
     return Tomato;
-}(Product));
+}());
+/*class Scales{
+    items:Array<Product>;
+
+    constructor() {
+        this.items=[];
+    }
+
+    add(_newItem:Product):void{
+     this.items.push(_newItem);
+    }
+    getSumScale():number{
+        let sum:number=0;
+     for ( let testnum:number=0; testnum<this.items.length; testnum++ ) {
+         let weight=this.items[testnum].getScale();
+         sum+=weight;
+    }
+      return sum;
+    }
+    getNameList():Array<String>{
+        let nameList:Array<String>=[];
+        for ( let testnum:number=0; testnum<this.items.length; testnum++ ) {
+         let name=this.items[testnum].getName();
+         nameList.push(name);
+        }
+        return nameList;
+    }
+}
+class Product {
+
+    weight:number;
+    name:string;
+
+    constructor(_name:string, _weight:number) {
+        this.name=_name;
+        this.weight=_weight;
+    }
+
+    getScale():number {
+        return this.weight;
+    }
+
+    getName():string {
+        return this.name;
+    }
+    
+}
+
+class Apple extends Product {
+    
+
+    constructor(name:string, weight:number) {
+   
+        super(name, weight);
+    }
+
+}
+
+class Tomato extends Product {
+
+    constructor(name:string, weight:number) {
+      
+        super(name, weight);
+    }
+
+}
+*/
 var scale = new Scales();
 var apple1 = new Apple('яблоко красное', 45);
 var apple2 = new Apple('яблоко зеленое', 125);
 var tomato1 = new Tomato('томат малиновый', 56);
-scale.add(apple1);
-scale.add(apple2);
-scale.add(tomato1);
+scale.addProduct(apple1);
+scale.addProduct(apple2);
+scale.addProduct(tomato1);
 var nameList = scale.getNameList();
 console.log('Список продуктов: ' + nameList);
 var sum = scale.getSumScale();
