@@ -1,14 +1,24 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-function Items({ id, name, url, price, types, sizes }) {
-  const [activeType, setActiveType] = React.useState(1);
+function Items({ id, name, url, price, types, size }) {
+  const [activeType, setActiveType] = React.useState(0);
+  const [activeSize, setActiveSize] = React.useState(0);
 
   const onSelectType = (index) => {
     setActiveType(index);
   };
 
-  const availableTypes = ['золото', 'платина', 'серебро'];
+  const onSelectSize = (index) => {
+    setActiveSize(index);
+  };
+
+  let availableTypes = types.map((element) => {
+    if (element === 0) return 'gold';
+    if (element === 1) return 'platina';
+    if (element === 2) return 'silver';
+  });
 
   return (
     <div className="jew-block">
@@ -16,25 +26,31 @@ function Items({ id, name, url, price, types, sizes }) {
       <h4 className="jew-block__title">{name}</h4>
       <div className="jew-block__selector">
         <ul>
-          {availableTypes.map((type, index) => (
-            <li
-              onClick={() => onSelectType(index)}
-              key={index}
-              className={activeType === index ? 'active' : ''}>
-              {type}
-            </li>
-          ))}
+          {availableTypes &&
+            availableTypes.map((type, index) => (
+              <li
+                onClick={() => onSelectType(index)}
+                key={type}
+                className={classNames({ active: activeType === index })}>
+                {type}
+              </li>
+            ))}
         </ul>
         <ul>
-          <li className="active">15</li>
-          <li>16</li>
-          <li>17</li>
-          <li>18</li>
-          <li>19</li>
+          {size == 0 && <li className="active">one size </li>}
+          {size != 0 &&
+            size.map((size, index) => (
+              <li
+                onClick={() => onSelectSize(index)}
+                key={size}
+                className={classNames({ active: activeSize === index })}>
+                {size}
+              </li>
+            ))}
         </ul>
       </div>
       <div className="jew-block__bottom">
-        <div className="jew-block__price">от {price} ₽</div>
+        <div className="jew-block__price">{price} €</div>
         <div className="button button--outline button--add">
           <svg
             width="12"

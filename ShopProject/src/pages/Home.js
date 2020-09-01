@@ -21,7 +21,8 @@ function Home() {
       <div className="content__items">
         {items.status <= 1 && <div>'загрузка...'</div>}
         {items.status === 2 && <div>'ошибка загрузки данных'</div>}
-        {items.status === 3 && items.data.map((obj, index) => <Items key={index} {...obj} />)}
+        {items.status === 3 && items.data.map((obj, index) => 
+        <Items key={index} {...obj} />)}
       </div>
     </div>
   );
