@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+
 const ButtonCart = ({onClick, className, outline, children}) =>{
   return (
       <button onClick={onClick}
@@ -12,5 +13,7 @@ const ButtonCart = ({onClick, className, outline, children}) =>{
     );
 }
   
-
+ButtonCart.propTypes={
+  onClick:PropTypes.func
+}
 export default ButtonCart;

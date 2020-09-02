@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Categories({ categories, onClickItem }) {
+function Categories({ categories}) {
   const [activeItem, setActiveItem] = React.useState(null);
 
   const onSelectItem = (index) => {
@@ -25,5 +26,10 @@ function Categories({ categories, onClickItem }) {
     </div>
   );
 }
-
+Categories.propTypes={
+  categories:PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.arrayOf(PropTypes.string).isRequired
+  ]),
+  }
 export default Categories;

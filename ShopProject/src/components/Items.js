@@ -70,4 +70,19 @@ function Items({ id, name, url, price, types, size }) {
     </div>
   );
 }
+Items.propTypes={
+  id:PropTypes.number.isRequired, 
+  name:PropTypes.string.isRequired, 
+  url:PropTypes.string.isRequired, 
+  price:PropTypes.number.isRequired, 
+  types:PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.number).isRequired,
+    PropTypes.number.isRequired
+  ]), 
+  size:PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.arrayOf(PropTypes.number).isRequired
+  ]),
+}
+
 export default Items;

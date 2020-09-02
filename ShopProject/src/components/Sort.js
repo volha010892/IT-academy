@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Sort({ items }) {
   const [visibleSort, setVisibleSort] = React.useState(false);
@@ -60,5 +61,10 @@ function Sort({ items }) {
     </div>
   );
 }
-
+Sort.propTypes={
+items:PropTypes.oneOfType([
+  PropTypes.string.isRequired,
+  PropTypes.arrayOf(PropTypes.string).isRequired
+]),
+}
 export default Sort;
