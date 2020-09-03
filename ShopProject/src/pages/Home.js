@@ -2,17 +2,31 @@ import React from 'react';
 import { Items, Categories, Sort } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsThunkAC } from '../../redux/fetchThunk';
+import { setCategory } from '../../AC/filtersAC';
+
+const categoriesArr = ['Кольца', 'Серьги', 'Кулоны', 'Браслеты', 'Цепочки'];
+const sortArr = [
+  { name: 'популярности', type: 'popular' },
+  { name: 'цене', type: 'price' },
+  { name: 'алфавит', type: 'alphabet' },
+];
 
 function Home() {
-  const items = useSelector((state) => state.items);
   const dispatch = useDispatch();
-  React.useEffect(() => dispatch(itemsThunkAC(dispatch)), []);
+  const items = useSelector(({ items }) => items);
+  const onSelectCategory = React.useCallback((index) => {
+    dispatch(setCategory(index));
+  }, []);
+
+  //state) => state.items);
+  // const dispatch = useDispatch();
+  // React.useEffect(() => dispatch(itemsThunkAC(dispatch)), []);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories categories={['Кольца', 'Серьги', 'Кулоны', 'Браслеты', 'Цепочки']} />
-        <Sort items={['популярности', 'цене', 'алфавит']} />
+        <Categories onClickItem={onSelectCategory} categories={categoriesArr} />
+        <Sort items={sortArr} />
       </div>
       <h2 className="content__title">Все украшения</h2>
       <div className="content__items">

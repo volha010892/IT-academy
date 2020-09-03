@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Sort({ items }) {
+const Sort = React.memo(function Sort({ items }) {
   const [visibleSort, setVisibleSort] = React.useState(false);
   const [activeItem, setActiveItem] = React.useState(0);
   const sortRef = React.useRef();
-  const activeLable = items[activeItem];
+  const activeLable = items[activeItem].name;
 
   const changeVisibleSort = () => {
     setVisibleSort(!visibleSort);
@@ -24,7 +24,7 @@ function Sort({ items }) {
   React.useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick);
   }, []);
-
+ 
   return (
     <div ref={sortRef} className="sort">
       <div className="sort__label">
@@ -47,12 +47,12 @@ function Sort({ items }) {
         <div className="sort__popup">
           <ul>
             {items &&
-              items.map((name, index) => (
+              items.map((obj, index) => (
                 <li
                   className={activeItem === index ? 'active' : ''}
                   onClick={() => onSelectItem(index)}
                   key={`${name}_${index}`}>
-                  {name}
+                  {obj.name}
                 </li>
               ))}
           </ul>
@@ -60,11 +60,8 @@ function Sort({ items }) {
       )}
     </div>
   );
-}
-Sort.propTypes={
-items:PropTypes.oneOfType([
-  PropTypes.string.isRequired,
-  PropTypes.arrayOf(PropTypes.string).isRequired
-]),
-}
+});
+Sort.propTypes = {
+  items: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.object).isRequired]),
+};
 export default Sort;
