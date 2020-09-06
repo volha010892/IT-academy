@@ -1,8 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import MyLoader from '../components';
 
-function Items({ id, name, url, price, types, size }) {
+function Items({ name, url, price, types, size }) {
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
 
@@ -22,7 +23,7 @@ function Items({ id, name, url, price, types, size }) {
 
   return (
     <div className="jew-block">
-      <img className="jew-block__image" src={url} alt="Jew" />
+      {url &&<img className="jew-block__image" src={url} alt="Jew" />}
       <h4 className="jew-block__title">{name}</h4>
       <div className="jew-block__selector">
         <ul>
@@ -70,19 +71,18 @@ function Items({ id, name, url, price, types, size }) {
     </div>
   );
 }
-Items.propTypes={
-  id:PropTypes.number.isRequired, 
-  name:PropTypes.string.isRequired, 
-  url:PropTypes.string.isRequired, 
-  price:PropTypes.number.isRequired, 
-  types:PropTypes.oneOfType([
+Items.propTypes = {
+  name: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  types: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.number).isRequired,
-    PropTypes.number.isRequired
-  ]), 
-  size:PropTypes.oneOfType([
     PropTypes.number.isRequired,
-    PropTypes.arrayOf(PropTypes.number).isRequired
   ]),
-}
+  size: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.arrayOf(PropTypes.number).isRequired,
+  ]),
+};
 
 export default Items;

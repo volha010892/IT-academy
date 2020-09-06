@@ -1,13 +1,13 @@
 const initialState = {
-  sortBy: 'popular',
-  category: 0,
+  sortBy: 'id',
+  category: null,
 };
 
 const filters = (state = initialState, action) => {
   if (action.type === 'SET_SORT_BY') {
     return {
       ...state,
-      sortBY: action.payload,
+      sortBy: action.payload,
     };
   }
   if (action.type === 'SET_CATEGORY') {

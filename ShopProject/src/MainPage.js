@@ -7,31 +7,23 @@ import { Cart, Home } from './pages';
 //import combinedReducer from '../redux/reducers.js';
 import './MainPage.css';
 import { Route, Switch } from 'react-router-dom';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { itemsThunkAC } from '../redux/fetchThunk';
 
-//const store = createStore(combinedReducer, applyMiddleware(thunk));
-
 function MainPage() {
-  const dispatch = useDispatch();
-  React.useEffect(() => dispatch(itemsThunkAC(dispatch)), []);
-  window.test=()=> {
-    dispatch(itemsThunkAC(dispatch));
-  }
+
   return (
-    //<Provider store={store}>
-      <div>
-        <div className="wrapper">
-          <Header />
-          <div className="content">
-            <Switch>
-              <Route path="/" component={Home} exact />
-              <Route path="/cart" component={Cart} exact />
-            </Switch>
-          </div>
+    <div>
+      <div className="wrapper">
+        <Header />
+        <div className="content">
+          <Switch>
+            <Route path="/" component={Home} exact />
+            <Route path="/cart" component={Cart} exact />
+          </Switch>
         </div>
       </div>
-    //</Provider>
+    </div>
   );
 }
 export default MainPage;

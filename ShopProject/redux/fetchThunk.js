@@ -1,25 +1,61 @@
 import isoFetch from 'isomorphic-fetch';
 import { itemsLoadingAC, itemsErrorAC, itemsSetAC } from '../AC/itemsAC';
+import * as firebase from 'firebase';
+let orders = [];
+function itemsThunkAC(dispatch, sortBy, category) {
+  const df = firebase.database().ref();
 
-function itemsThunkAC(dispatch) {
-    
-  // Как и любой action creator, countriesThunkAC должен вернуть action,
-  // только action будет не хэш, а ФУНКЦИЯ.
-  // Все middleware стоят ДО редьюсеров, их задача - преобразовывать или фильтровать action-ы.
-  // Конкретно middleware "thunk", если обнаруживает что action - функция а не хэш,
-  // ВЫПОЛНЯЕТ эту функцию и не пропускает её дальше, к редьюсерам.
   return function () {
     dispatch(itemsLoadingAC());
     isoFetch('https://ishop-57739.firebaseio.com/.json')
       .then((response) => {
-        // response - HTTP-ответ
         if (!response.ok) {
           let Err = new Error('fetch error ' + response.status);
           Err.userMessage = 'Ошибка связи';
           throw Err;
-        } else return response.json();
+        } else {
+          if (category != null) {
+            df.orderByChild('category')
+              .equalTo(category)
+              .once('value', function (data) {
+                for (var z in data.val()) {
+                  orders.push(data.val()[z]);
+                }
+              });
+          } else {
+            return response.json();
+          }
+          if (sortBy === 'name') {
+            orders = orders.sort(function (a, b) {
+              if (a.name < b.name) {
+                return -1;
+              }
+              if (a.name > b.name) {
+                return 1;
+              }
+              return 0;
+            });
+          }
+          if (sortBy === 'price') {
+            orders = orders.sort(function (a, b) {
+              if (a.price < b.price) {
+                return -1;
+              }
+              if (a.price > b.price) {
+                return 1;
+              }
+              return 0;
+            });
+          }
+          return orders;
+          /* df.orderByChild('category').equalTo(category).on('child_added', function (data) {
+                y.push(data.val());
+              });
+              return y;*/
+        }
       })
       .then((data) => {
+        console.log(data);
         dispatch(itemsSetAC(data));
       })
       .catch((error) => {
@@ -29,4 +65,4 @@ function itemsThunkAC(dispatch) {
   };
 }
 
-export {itemsThunkAC };
+export { itemsThunkAC };
