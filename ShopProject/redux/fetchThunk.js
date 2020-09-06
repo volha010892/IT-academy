@@ -1,7 +1,7 @@
 import isoFetch from 'isomorphic-fetch';
 import { itemsLoadingAC, itemsErrorAC, itemsSetAC } from '../AC/itemsAC';
 import * as firebase from 'firebase';
-let orders = [];
+
 function itemsThunkAC(dispatch, sortBy, category) {
   const df = firebase.database().ref();
 
@@ -15,17 +15,15 @@ function itemsThunkAC(dispatch, sortBy, category) {
           throw Err;
         } else {
           if (category != null) {
-            df.orderByChild('category')
+            return df
+              .orderByChild('category')
               .equalTo(category)
-              .once('value', function (data) {
-                for (var z in data.val()) {
-                  orders.push(data.val()[z]);
-                }
-              });
+              .once('value')
+              .then((snapshot) => snapshot.val());
           } else {
             return response.json();
           }
-          if (sortBy === 'name') {
+          /*if (sortBy === 'name') {
             orders = orders.sort(function (a, b) {
               if (a.name < b.name) {
                 return -1;
@@ -46,16 +44,10 @@ function itemsThunkAC(dispatch, sortBy, category) {
               }
               return 0;
             });
-          }
-          return orders;
-          /* df.orderByChild('category').equalTo(category).on('child_added', function (data) {
-                y.push(data.val());
-              });
-              return y;*/
+          }*/
         }
       })
       .then((data) => {
-        console.log(data);
         dispatch(itemsSetAC(data));
       })
       .catch((error) => {

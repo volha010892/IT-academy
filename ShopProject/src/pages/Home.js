@@ -2,10 +2,10 @@ import React from 'react';
 import { Items, Categories, Sort, MyLoader } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsThunkAC } from '../../redux/fetchThunk';
-import { setSortBy, setCategory} from '../../AC/filtersAC';
+import { setSortBy, setCategory } from '../../AC/filtersAC';
 import * as firebase from 'firebase';
 
-const categoriesArr = ['Кольца','Цепочки', 'Серьги', 'Браслеты', 'Кулоны'];
+const categoriesArr = ['Кольца', 'Цепочки', 'Серьги', 'Браслеты', 'Кулоны'];
 const sortArr = [
   { name: 'популярности', type: 'id' },
   { name: 'цене', type: 'price' },
@@ -15,9 +15,7 @@ const sortArr = [
 function Home() {
   const dispatch = useDispatch();
   const items = useSelector(({ items }) => items);
-  const {sortBy, category} = useSelector(({ filters }) => filters);
-console.log(items)
-
+  const { sortBy, category } = useSelector(({ filters }) => filters);
 
   React.useEffect(() => dispatch(itemsThunkAC(dispatch, sortBy, category)), [sortBy, category]);
 
@@ -28,7 +26,7 @@ console.log(items)
   const onSelectSortType = React.useCallback((type) => {
     dispatch(setSortBy(type));
   }, []);
-  
+
   const itemsLoadingArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
@@ -39,17 +37,18 @@ console.log(items)
           onClickItem={onSelectCategory}
           categories={categoriesArr}
         />
-        <Sort 
-          activeSortType={sortBy} 
-          items={sortArr} 
-          onClickSortType={onSelectSortType} 
-        />
+        <Sort activeSortType={sortBy} items={sortArr} onClickSortType={onSelectSortType} />
       </div>
       <h2 className="content__title">Все украшения</h2>
       <div className="content__items">
         {items.status <= 1 && itemsLoadingArray.map((index) => <MyLoader key={index} />)}
         {items.status === 2 && itemsLoadingArray.map((index) => <MyLoader key={index} />)}
-        {items.status === 3 && items.data.map((obj, index) => <Items key={index} {...obj} />)}
+        {items.status === 3 &&
+          (Array.isArray(items.data)
+            ? items.data.map((obj, index) => <Items key={index} {...obj} />)
+            : Object.keys(items.data).map((obj, index) => (
+                <Items key={index} {...items.data[obj]} />
+              )))}
       </div>
     </div>
   );

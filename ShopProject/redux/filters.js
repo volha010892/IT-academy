@@ -1,6 +1,6 @@
 const initialState = {
   sortBy: 'id',
-  category: null,
+  category: 1,
 };
 
 const filters = (state = initialState, action) => {
