@@ -7,22 +7,14 @@ function itemsThunkAC(dispatch, sortBy, category) {
 
   return function () {
     dispatch(itemsLoadingAC());
-    isoFetch('https://ishop-57739.firebaseio.com/.json')
+    isoFetch(`https://ishop-57739.firebaseio.com/.json?${category !== null ?`orderBy="category"&equalTo=` + category : ''}`)
       .then((response) => {
         if (!response.ok) {
           let Err = new Error('fetch error ' + response.status);
           Err.userMessage = 'Ошибка связи';
           throw Err;
         } else {
-          if (category != null) {
-            return df
-              .orderByChild('category')
-              .equalTo(category)
-              .once('value')
-              .then((snapshot) => snapshot.val());
-          } else {
-            return response.json();
-          }
+          return response.json();
           /*if (sortBy === 'name') {
             orders = orders.sort(function (a, b) {
               if (a.name < b.name) {
