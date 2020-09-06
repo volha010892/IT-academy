@@ -13,6 +13,8 @@ const sortArr = [
 ];
 
 function Home() {
+  let getItems = [];
+  let sortItems = [];
   const dispatch = useDispatch();
   const items = useSelector(({ items }) => items);
   const { sortBy, category } = useSelector(({ filters }) => filters);
@@ -29,6 +31,45 @@ function Home() {
 
   const itemsLoadingArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
+  if (items.data) {
+    !Array.isArray(items.data)
+      ? Object.keys(items.data).map((obj, index) => getItems.push(items.data[obj]))
+      : (getItems = items.data);
+
+    if (sortBy === 'price') {
+      sortItems = getItems.sort(function (a, b) {
+        if (a.price < b.price) {
+          return -1;
+        }
+        if (a.price > b.price) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+    if (sortBy === 'name') {
+      sortItems = getItems.sort(function (a, b) {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+    if (sortBy === 'id') {
+      sortItems = getItems.sort(function (a, b) {
+        if (a.id < b.id) {
+          return -1;
+        }
+        if (a.id > b.id) {
+          return 1;
+        }
+        return 0;
+      });
+    }
+  }
   return (
     <div className="container">
       <div className="content__top">
@@ -43,12 +84,7 @@ function Home() {
       <div className="content__items">
         {items.status <= 1 && itemsLoadingArray.map((index) => <MyLoader key={index} />)}
         {items.status === 2 && itemsLoadingArray.map((index) => <MyLoader key={index} />)}
-        {items.status === 3 &&
-          (Array.isArray(items.data)
-            ? items.data.map((obj, index) => <Items key={index} {...obj} />)
-            : Object.keys(items.data).map((obj, index) => (
-                <Items key={index} {...items.data[obj]} />
-              )))}
+        {items.status === 3 && sortItems.map((obj, index) => <Items key={index} {...obj} />)}
       </div>
     </div>
   );
