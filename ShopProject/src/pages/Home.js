@@ -18,6 +18,8 @@ function Home() {
   let sortItems = [];
   const dispatch = useDispatch();
   const items = useSelector(({ items }) => items);
+  const cartItems = useSelector(({ cart }) => cart.items);
+
   const { sortBy, category } = useSelector(({ filters }) => filters);
 
   React.useEffect(() => dispatch(itemsThunkAC(dispatch, category)), [sortBy, category]);
@@ -93,7 +95,12 @@ function Home() {
         {items.status === 2 && itemsLoadingArray.map((index) => <MyLoader key={index} />)}
         {items.status === 3 &&
           sortItems.map((obj, index) => (
-            <Items onClickAddItem={addItemCart} key={index} {...obj} />
+            <Items
+              onClickAddItem={addItemCart}
+              key={index}
+              countItem={cartItems[obj.id] && cartItems[obj.id].length}
+              {...obj}
+            />
           ))}
       </div>
     </div>

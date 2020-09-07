@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import MyLoader from '../components';
 import Button from './Button';
 
-function Items({ id, name, url, price, types, size, onClickAddItem }) {
+function Items({ id, name, url, price, types, size, onClickAddItem, countItem }) {
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
 
@@ -32,7 +32,6 @@ function Items({ id, name, url, price, types, size, onClickAddItem }) {
     };
     onClickAddItem(obj);
   };
-  
 
   return (
     <div className="jew-block">
@@ -78,7 +77,7 @@ function Items({ id, name, url, price, types, size, onClickAddItem }) {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {countItem && <i>{countItem}</i>}
         </Button>
       </div>
     </div>
@@ -97,6 +96,7 @@ Items.propTypes = {
     PropTypes.number.isRequired,
     PropTypes.arrayOf(PropTypes.number).isRequired,
   ]),
+  countItem: PropTypes.number,
 };
 
 export default Items;
