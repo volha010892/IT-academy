@@ -6,22 +6,23 @@ const initialState = {
 
 const cart = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_ITEM_CART':{
-        const newItems={
-            ...state.items,
-            [action.payload.id]: 
-              !state.items[action.payload.id]
-                ? [action.payload]
-                : [...state.items[action.payload.id], action.payload],
-          };
-        return {
+    case 'ADD_ITEM_CART': {
+      const newItems = {
+        ...state.items,
+        [action.payload.id]: !state.items[action.payload.id]
+          ? [action.payload]
+          : [...state.items[action.payload.id], action.payload],
+      };
+      const concatItems = [].concat.apply([], Object.values(newItems));
+      const totalPrice = concatItems.reduce((sum, item) => item.price + sum, 0);
+      return {
         ...state,
-        items: newItems,  
-        totalCount: [].concat.apply([], Object.values(items)).length,
-        };
-        
-      }
-    
+        items: newItems,
+        totalCount: concatItems.length,
+        totalPrice,
+      };
+    }
+
     default:
       return state;
   }
