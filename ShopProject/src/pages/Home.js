@@ -3,6 +3,7 @@ import { Items, Categories, Sort, MyLoader } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsThunkAC } from '../../redux/fetchThunk';
 import { setSortBy, setCategory } from '../../AC/filtersAC';
+import { addItemtoCart } from '../../AC/cartAC';
 import * as firebase from 'firebase';
 
 const categoriesArr = ['Кольца', 'Цепочки', 'Серьги', 'Браслеты', 'Кулоны'];
@@ -19,7 +20,7 @@ function Home() {
   const items = useSelector(({ items }) => items);
   const { sortBy, category } = useSelector(({ filters }) => filters);
 
-  React.useEffect(() => dispatch(itemsThunkAC(dispatch, sortBy, category)), [sortBy, category]);
+  React.useEffect(() => dispatch(itemsThunkAC(dispatch, category)), [sortBy, category]);
 
   const onSelectCategory = React.useCallback((index) => {
     dispatch(setCategory(index));
@@ -29,6 +30,12 @@ function Home() {
     dispatch(setSortBy(type));
   }, []);
 
+  const addItemCart = (obj) => {
+    dispatch({
+      type: 'ADD_ITEM_CART',
+      payload: obj,
+    });
+  };
   const itemsLoadingArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
   if (items.data) {
@@ -84,7 +91,10 @@ function Home() {
       <div className="content__items">
         {items.status <= 1 && itemsLoadingArray.map((index) => <MyLoader key={index} />)}
         {items.status === 2 && itemsLoadingArray.map((index) => <MyLoader key={index} />)}
-        {items.status === 3 && sortItems.map((obj, index) => <Items key={index} {...obj} />)}
+        {items.status === 3 &&
+          sortItems.map((obj, index) => (
+            <Items onClickAddItem={addItemCart} key={index} {...obj} />
+          ))}
       </div>
     </div>
   );

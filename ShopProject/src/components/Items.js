@@ -2,8 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import MyLoader from '../components';
+import Button from './Button';
 
-function Items({ name, url, price, types, size }) {
+function Items({ id, name, url, price, types, size, onClickAddItem }) {
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
 
@@ -14,16 +15,28 @@ function Items({ name, url, price, types, size }) {
   const onSelectSize = (index) => {
     setActiveSize(index);
   };
-
   let availableTypes = types.map((element) => {
     if (element === 0) return 'gold';
     if (element === 1) return 'platina';
     if (element === 2) return 'silver';
   });
 
+  const onAddItem = () => {
+    const obj = {
+      id,
+      name,
+      url,
+      price,
+      size: size[activeSize],
+      type: availableTypes[activeType],
+    };
+    onClickAddItem(obj);
+  };
+  
+
   return (
     <div className="jew-block">
-      {url &&<img className="jew-block__image" src={url} alt="Jew" />}
+      {url && <img className="jew-block__image" src={url} alt="Jew" />}
       <h4 className="jew-block__title">{name}</h4>
       <div className="jew-block__selector">
         <ul>
@@ -52,7 +65,7 @@ function Items({ name, url, price, types, size }) {
       </div>
       <div className="jew-block__bottom">
         <div className="jew-block__price">{price} €</div>
-        <div className="button button--outline button--add">
+        <Button onClick={onAddItem} className="button--add" outline>
           <svg
             width="12"
             height="12"
@@ -66,7 +79,7 @@ function Items({ name, url, price, types, size }) {
           </svg>
           <span>Добавить</span>
           <i>2</i>
-        </div>
+        </Button>
       </div>
     </div>
   );
@@ -75,6 +88,7 @@ Items.propTypes = {
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  addItem: PropTypes.func,
   types: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.number).isRequired,
     PropTypes.number.isRequired,
