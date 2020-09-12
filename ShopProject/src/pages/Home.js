@@ -98,7 +98,7 @@ function Home() {
             <Items
               onClickAddItem={addItemCart}
               key={index}
-              countItem={cartItems[obj.id] && cartItems[obj.id].length}
+              countItem={cartItems[obj.id] && cartItems[obj.id].items.length}
               {...obj}
             />
           ))}

@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 
 import itemsReducer from './items';
 import filtersReducer from './filters';
-import cartReducer from './cart';
+import cart from './cart';
 
 let combinedReducer = combineReducers({
   items: itemsReducer,
   filters: filtersReducer,
-  cart: cartReducer,
+  cart,
 });
 
 export default combinedReducer;

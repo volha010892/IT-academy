@@ -15,21 +15,20 @@ function Header() {
       <div className="container">
         <Link to="/">
           <div className="header__logo">
-            <img width="38" src={logoSvg} alt="logo" />
+            <img width="60" src={logoSvg} alt="logo" />
             <div>
               <h1>Jewellery</h1>
-              <p>самая стильная бижутерия</p>
+              <h3>самая стильная бижутерия</h3>
             </div>
           </div>
         </Link>
         <div className="header__cart">
           <Link to="/cart">
             <ButtonCart className="button button--cart">
-              <span>{totalPrice} €</span>
-              <div className="button__delimiter"></div>
+              <div className="button__cart__inline">
               <svg
-                width="18"
-                height="18"
+                width="30"
+                height="30"
                 viewBox="0 0 18 18"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +54,12 @@ function Header() {
                   strokeLinejoin="round"
                 />
               </svg>
+              </div>
+              <div className="button__cart__inline">
+              <span>{totalPrice} €</span>
+              <div className="button__delimiter"></div>
               <span>{totalCount}</span>
+              </div>
             </ButtonCart>
           </Link>
         </div>
