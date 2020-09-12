@@ -37,15 +37,55 @@ const cart = (state = initialState, action) => {
       const newItems = {
         ...state.items,
       };
-      const currentTotalPrice=newItems[action.payload].totalPrice;
-      const currentTotalCount=newItems[action.payload].items.length;
-      
+      const currentTotalPrice = newItems[action.payload].totalPrice;
+      const currentTotalCount = newItems[action.payload].items.length;
+
       delete newItems[action.payload];
       return {
         ...state,
         items: newItems,
         totalPrice: state.totalPrice - currentTotalPrice,
         totalCount: state.totalCount - currentTotalCount,
+      };
+    case 'ADD_ONE_ITEM':
+      const newObjPlus = [
+        ...state.items[action.payload].items,
+        state.items[action.payload].items[0],
+      ];
+      const newItemsPlus = {
+        ...state.items,
+        [action.payload]: {
+          items: newObjPlus,
+          totalPrice: totalPriceItems(newObjPlus),
+        },
+      };
+      const getItemsPlus = Object.values(newItemsPlus).map((obj) => obj.items);
+      const concatItemsPlus = [].concat.apply([], getItemsPlus);
+      const totalPricePlus = totalPriceItems(concatItemsPlus);
+      return {
+        ...state,
+        items: newItemsPlus,
+        totalPrice: totalPricePlus,
+        totalCount: concatItemsPlus.length,
+      };
+    case 'DELETE_ONE_ITEM':
+      const oldItems = state.items[action.payload].items;
+      const newObjMinus = oldItems.length > 1 ? (state.items[action.payload].items.slice(1)): oldItems;
+      const newItemsMinus = {
+        ...state.items,
+        [action.payload]: {
+          items: newObjMinus,
+          totalPrice: totalPriceItems(newObjMinus),
+        },
+      };
+      const getItemsMinus = Object.values(newItemsMinus).map((obj) => obj.items);
+      const concatItemsMinus = [].concat.apply([], getItemsMinus);
+      const totalPriceMinus = totalPriceItems(concatItemsMinus);
+      return {
+        ...state,
+        items: newItemsMinus,
+        totalPrice: totalPriceMinus,
+        totalCount: concatItemsMinus.length,
       };
     default:
       return state;

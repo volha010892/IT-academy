@@ -1,10 +1,10 @@
 import React from 'react';
 import CartItem from '../components/CartItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { clearCart, deleteItemFromCart } from '../../AC/cartAC';
+import { clearCart, deleteItemFromCart, deleteOneItem, addOneItem } from '../../AC/cartAC';
 import cartPng from '../img/cart.png';
 import { Link } from 'react-router-dom';
-
+import Button from '../components/Button';
 function Cart() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
@@ -21,6 +21,15 @@ function Cart() {
       dispatch(deleteItemFromCart(id));
     }
   };
+  const clickDeleteOneItem=(id)=>{
+    dispatch(deleteOneItem(id));
+  }
+  const clickAddOneItem=(id)=>{
+    dispatch(addOneItem(id));
+  }
+  const clickOrder=()=>{
+console.log(items);
+  }
   return (
     <div className="container container--cart">
       {totalCount ? (
@@ -102,6 +111,8 @@ function Cart() {
                 totalItemPrice={items[obj.id].totalPrice}
                 totalItemCount={items[obj.id].items.length}
                 deleteItem={clickDeleteItem}
+                addOneItem={clickAddOneItem}
+                deleteOneItem={clickDeleteOneItem}
               />
             ))}
           </div>
@@ -132,9 +143,9 @@ function Cart() {
 
                 <span>Вернуться назад</span>
               </a>
-              <div className="button pay-btn">
+              <Button onClick={clickOrder} className="button pay-btn">
                 <span>Оплатить сейчас</span>
-              </div>
+              </Button>
             </div>
           </div>
         </div>
