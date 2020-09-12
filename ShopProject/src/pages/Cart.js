@@ -5,6 +5,7 @@ import { clearCart, deleteItemFromCart, deleteOneItem, addOneItem } from '../../
 import cartPng from '../img/cart.png';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
+
 function Cart() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
@@ -21,15 +22,16 @@ function Cart() {
       dispatch(deleteItemFromCart(id));
     }
   };
-  const clickDeleteOneItem=(id)=>{
+  const clickDeleteOneItem = (id) => {
     dispatch(deleteOneItem(id));
-  }
-  const clickAddOneItem=(id)=>{
+  };
+  const clickAddOneItem = (id) => {
     dispatch(addOneItem(id));
-  }
-  const clickOrder=()=>{
-console.log(items);
-  }
+  };
+  const clickOrder = () => {
+    console.log(items);
+  };
+
   return (
     <div className="container container--cart">
       {totalCount ? (
@@ -126,7 +128,7 @@ console.log(items);
               </span>
             </div>
             <div className="cart__bottom-buttons">
-              <a href="/" className="button button--outline button--add go-back-btn">
+              <Link to="/" className="button button--outline button--add go-back-btn">
                 <svg
                   width="8"
                   height="14"
@@ -142,7 +144,7 @@ console.log(items);
                 </svg>
 
                 <span>Вернуться назад</span>
-              </a>
+              </Link>
               <Button onClick={clickOrder} className="button pay-btn">
                 <span>Оплатить сейчас</span>
               </Button>
