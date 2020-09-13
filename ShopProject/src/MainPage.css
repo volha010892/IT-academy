@@ -727,6 +727,13 @@ body {
 .menu__box__hidden {
   display: none;
 }
+.example-leave {
+  opacity: 1;
+}
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
 @media all and (max-width: 1150px) {
   .categories__none {
     display: none;

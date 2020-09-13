@@ -13,7 +13,9 @@ function CartItem({
   addOneItem,
   deleteOneItem,
 }) {
+  const [activeDeleteItem, setActiveDeleteItem] = React.useState(false);
   const clickDeleteItemFromCart = () => {
+    setActiveDeleteItem(!activeDeleteItem);
     deleteItem(id);
   };
   const clickDeleteOneItem = () => {
@@ -24,7 +26,7 @@ function CartItem({
   };
 
   return (
-    <div className="cart__item">
+    <div className={activeDeleteItem ? 'example-leave example-leave-active cart__item' : 'example-leave cart__item'}>
       <div className="cart__item-img">
         <img className="jew-block__image" src={url} alt="Jew" />
       </div>

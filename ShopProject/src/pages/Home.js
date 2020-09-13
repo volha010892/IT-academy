@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { itemsThunkAC } from '../../redux/fetchThunk';
 import { setSortBy, setCategory } from '../../AC/filtersAC';
 import mobileMenu from '../img/mobileMenu.png';
+import orderBy from 'lodash/orderBy';
+import Button from '../components/Button';
 
 const categoriesArr = ['Кольца', 'Цепочки', 'Серьги', 'Браслеты', 'Кулоны'];
 const sortArr = [
@@ -47,6 +49,9 @@ function Home() {
       setActiveMobMenu(false);
     }
   };
+  const showMore = () => {
+    
+  };
   React.useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick);
   }, []);
@@ -55,42 +60,9 @@ function Home() {
 
   if (items.data) {
     !Array.isArray(items.data)
-      ? Object.keys(items.data).map((obj, index) => getItems.push(items.data[obj]))
+      ? Object.keys(items.data).map((obj) => getItems.push(items.data[obj]))
       : (getItems = items.data);
-
-    if (sortBy === 'price') {
-      sortItems = getItems.sort(function (a, b) {
-        if (a.price < b.price) {
-          return -1;
-        }
-        if (a.price > b.price) {
-          return 1;
-        }
-        return 0;
-      });
-    }
-    if (sortBy === 'name') {
-      sortItems = getItems.sort(function (a, b) {
-        if (a.name < b.name) {
-          return -1;
-        }
-        if (a.name > b.name) {
-          return 1;
-        }
-        return 0;
-      });
-    }
-    if (sortBy === 'id') {
-      sortItems = getItems.sort(function (a, b) {
-        if (a.id < b.id) {
-          return -1;
-        }
-        if (a.id > b.id) {
-          return 1;
-        }
-        return 0;
-      });
-    }
+    sortItems = orderBy(getItems, sortBy, 'DESC');
   }
   return (
     <div className="container">
@@ -129,6 +101,11 @@ function Home() {
               {...obj}
             />
           ))}
+      </div>
+      <div className="cart cart--empty">
+        <Button onClick={showMore} className="button button--black">
+          <span>Show more</span>
+        </Button>
       </div>
     </div>
   );

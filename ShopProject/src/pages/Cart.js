@@ -17,9 +17,12 @@ function Cart() {
       dispatch(clearCart());
     }
   };
-  const clickDeleteItem = (id) => {
+  const clickDeleteItem = (id) => { 
     if (window.confirm('Вы уверены?')) {
-      dispatch(deleteItemFromCart(id));
+      setTimeout(
+        () =>  dispatch(deleteItemFromCart(id)),
+        500
+        );
     }
   };
   const clickDeleteOneItem = (id) => {
