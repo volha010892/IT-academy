@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearCart, deleteItemFromCart, deleteOneItem, addOneItem } from '../../AC/cartAC';
 import cartPng from '../img/cart.png';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button';
 
 function Cart() {
   const dispatch = useDispatch();
@@ -30,9 +29,6 @@ function Cart() {
   };
   const clickAddOneItem = (id) => {
     dispatch(addOneItem(id));
-  };
-  const clickOrder = () => {
-    console.log(items);
   };
   return (
     <div className="container container--cart">
@@ -147,9 +143,9 @@ function Cart() {
 
                 <span>Вернуться назад</span>
               </Link>
-              <Button onClick={clickOrder} className="button pay-btn">
+              <Link to="/order" className="button pay-btn">
                 <span>Оплатить сейчас</span>
-              </Button>
+              </Link>
             </div>
           </div>
         </div>
