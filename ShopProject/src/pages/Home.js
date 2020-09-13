@@ -3,8 +3,7 @@ import { Items, Categories, Sort, MyLoader } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { itemsThunkAC } from '../../redux/fetchThunk';
 import { setSortBy, setCategory } from '../../AC/filtersAC';
-import { addItemtoCart } from '../../AC/cartAC';
-import * as firebase from 'firebase';
+import mobileMenu from '../img/mobileMenu.png';
 
 const categoriesArr = ['Кольца', 'Цепочки', 'Серьги', 'Браслеты', 'Кулоны'];
 const sortArr = [
@@ -16,12 +15,13 @@ const sortArr = [
 function Home() {
   let getItems = [];
   let sortItems = [];
+  const mobMenuRef = React.useRef();
   const dispatch = useDispatch();
   const items = useSelector(({ items }) => items);
   const cartItems = useSelector(({ cart }) => cart.items);
 
   const { sortBy, category } = useSelector(({ filters }) => filters);
-
+  const [activeMobMenu, setActiveMobMenu] = React.useState(false);
   React.useEffect(() => dispatch(itemsThunkAC(dispatch, category)), [sortBy, category]);
 
   const onSelectCategory = React.useCallback((index) => {
@@ -38,6 +38,19 @@ function Home() {
       payload: obj,
     });
   };
+  const showMobileMenu = () => {
+    setActiveMobMenu(!activeMobMenu);
+  };
+  const handleOutsideClick = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+    if (!path.includes(mobMenuRef.current)) {
+      setActiveMobMenu(false);
+    }
+  };
+  React.useEffect(() => {
+    document.body.addEventListener('click', handleOutsideClick);
+  }, []);
+
   const itemsLoadingArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
   if (items.data) {
@@ -82,13 +95,27 @@ function Home() {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories
-          activCategory={category}
-          onClickItem={onSelectCategory}
-          categories={categoriesArr}
-        />
+        <div className="categories__none">
+          <Categories
+            activCategory={category}
+            onClickItem={onSelectCategory}
+            categories={categoriesArr}
+          />
+        </div>
+        <div ref={mobMenuRef} className="hamburger-menu">
+          <div onClick={showMobileMenu} className="menu__btn">
+            <img width="60" src={mobileMenu} alt="menu" />
+          </div>
+        </div>
         <Sort activeSortType={sortBy} items={sortArr} onClickSortType={onSelectSortType} />
       </div>
+      <div className={activeMobMenu ? 'menu__box__visible' : 'menu__box__hidden'}>
+            <Categories
+              activCategory={category}
+              onClickItem={onSelectCategory}
+              categories={categoriesArr}
+            />
+          </div>
       <h2 className="content__title">Все украшения</h2>
       <div className="content__items">
         {items.status <= 1 && itemsLoadingArray.map((index) => <MyLoader key={index} />)}

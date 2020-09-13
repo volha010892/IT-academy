@@ -1,16 +1,28 @@
 import React from 'react';
 import Button from './Button';
 
-function CartItem({id, name, type, size, url, totalItemPrice, totalItemCount, deleteItem, addOneItem, deleteOneItem }) {
-  const clickDeleteItemFromCart=()=>{
+function CartItem({
+  id,
+  name,
+  type,
+  size,
+  url,
+  totalItemPrice,
+  totalItemCount,
+  deleteItem,
+  addOneItem,
+  deleteOneItem,
+}) {
+  const clickDeleteItemFromCart = () => {
     deleteItem(id);
-  }
-  const clickDeleteOneItem=()=>{
+  };
+  const clickDeleteOneItem = () => {
     deleteOneItem(id);
-  }
-  const clickAddOneItem=()=>{
+  };
+  const clickAddOneItem = () => {
     addOneItem(id);
-  }
+  };
+
   return (
     <div className="cart__item">
       <div className="cart__item-img">
@@ -23,7 +35,9 @@ function CartItem({id, name, type, size, url, totalItemPrice, totalItemCount, de
         </p>
       </div>
       <div className="cart__item-count">
-        <Button onClick={clickDeleteOneItem} className="button button--outline button--circle cart__item-count-minus">
+        <Button
+          onClick={clickDeleteOneItem}
+          className="button button--outline button--circle cart__item-count-minus">
           <svg
             width="10"
             height="10"
@@ -39,7 +53,9 @@ function CartItem({id, name, type, size, url, totalItemPrice, totalItemCount, de
           </svg>
         </Button>
         <b>{totalItemCount}</b>
-        <Button onClick={clickAddOneItem} className="button button--outline button--circle cart__item-count-plus">
+        <Button
+          onClick={clickAddOneItem}
+          className="button button--outline button--circle cart__item-count-plus">
           <svg
             width="10"
             height="10"

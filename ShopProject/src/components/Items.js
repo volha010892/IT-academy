@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import MyLoader from '../components';
 import Button from './Button';
 
 function Items({ id, name, url, price, types, size, onClickAddItem, countItem }) {

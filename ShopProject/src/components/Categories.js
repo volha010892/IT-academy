@@ -29,6 +29,6 @@ Categories.propTypes = {
     PropTypes.arrayOf(PropTypes.string).isRequired,
   ]),
 };
-//Categories.defaultprops = { activCategory: null, categoties: [] };
+
 
 export default Categories;
