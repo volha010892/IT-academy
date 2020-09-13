@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '../components/Button';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import logoCards from '../img/cards.png';
 function Order() {
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
   const itemsCart = Object.keys(items).map((key) => {
@@ -11,7 +11,7 @@ function Order() {
     <div className="row">
       <div className="col-75">
         <div className="container_order">
-          <form action="../action_page.php">
+          <form>
             <div className="row">
               <div className="col-50">
                 <h3>Платежный адрес</h3>
@@ -38,7 +38,9 @@ function Order() {
               <div className="col-50">
                 <h3>Payment</h3>
                 <label>Accepted Cards</label>
-                <div className="icon-container"></div>
+                <div className="icon-container">
+                <img src={logoCards} alt="logo" />
+                </div>
                 <label>Name on Card</label>
                 <input type="text" id="cname" name="cardname" placeholder="John Еще Doe" />
                 <label>Credit card number</label>
@@ -84,7 +86,7 @@ function Order() {
       <div className="col-25">
         <div className="container_order">
           <h4>
-            Cart{' '}
+            Cart
             <span className="price">
               <b>{totalCount}</b>
             </span>

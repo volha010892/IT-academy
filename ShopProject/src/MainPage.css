@@ -781,7 +781,11 @@ label {
 .icon-container {
   margin-bottom: 20px;
   padding: 7px 0;
-  font-size: 24px;
+}
+.icon-container img{
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 3px; 
 }
 span.price {
   float: right;
