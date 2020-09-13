@@ -110,12 +110,12 @@ function Home() {
         <Sort activeSortType={sortBy} items={sortArr} onClickSortType={onSelectSortType} />
       </div>
       <div className={activeMobMenu ? 'menu__box__visible' : 'menu__box__hidden'}>
-            <Categories
-              activCategory={category}
-              onClickItem={onSelectCategory}
-              categories={categoriesArr}
-            />
-          </div>
+        <Categories
+          activCategory={category}
+          onClickItem={onSelectCategory}
+          categories={categoriesArr}
+        />
+      </div>
       <h2 className="content__title">Все украшения</h2>
       <div className="content__items">
         {items.status <= 1 && itemsLoadingArray.map((index) => <MyLoader key={index} />)}

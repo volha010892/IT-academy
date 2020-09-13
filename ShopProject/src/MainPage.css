@@ -722,7 +722,9 @@ body {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
-.hamburger-menu {
+.hamburger-menu,
+.menu__box__visible,
+.menu__box__hidden {
   display: none;
 }
 @media all and (max-width: 1150px) {
@@ -731,19 +733,22 @@ body {
   }
   .hamburger-menu {
     display: block;
-    z-index: 2;
   }
   .categories ul {
     display: block;
   }
   .menu__box__hidden {
-    display: none;
+    position: fixed;
+    display: flex;
+    margin: 0 0 0 -250px;
   }
-  .menu__box__visible{
-    display: block;
+  .menu__box__visible {
+    position: relative;
+    display: flex;
+    transition: margin 0.5s;
+    margin-left: 0;
   }
   .menu__btn {
     cursor: pointer;
-    z-index: 1;
   }
 }
