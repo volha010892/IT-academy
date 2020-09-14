@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import logoCards from '../img/cards.png';
 import { useForm } from 'react-hook-form';
 import Button from '../components/Button';
+import Account from '../components/Account';
 
 function Order() {
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
@@ -14,48 +15,7 @@ function Order() {
   const onChange = (data) => console.log(data);
   return (
     <div>
-      <div className="sing_in">
-        <h2>Sing in</h2>
-      </div>
-      <div className=" container_order sing_in_big">
-        <div className='sing_in_form'>
-        <div >
-          <label forhtml="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="john@example.com"
-            ref={register({
-              required: true,
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'invalid email address',
-              },
-            })}
-          />
-          <div className="error">{errors.email && errors.email.message}</div>
-        </div>
-        <div>
-          <label forhtml="password">Password</label>
-          <input
-            type="text"
-            id="password"
-            name="password"
-            placeholder="gzdfh45653453rdf"
-            ref={register({
-              required: true,
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'invalid password',
-              },
-            })}
-          />
-          <div className="error">{errors.passworx && errors.password.message}</div>
-        </div>
-        </div>
-        <Button className="button button--black">Continue</Button>
-      </div>
+      <Account/>
       <div className="sing_in">
         <h2>Or</h2>
       </div>
@@ -73,9 +33,9 @@ function Order() {
                     name="firstname"
                     placeholder="John"
                     ref={register({
-                      required: true,
+                      required: 'invalid first name',
                       pattern: {
-                        value: /^[A-Za-z]+$/,
+                        value: /^[a-zA-Z ]{2,30}$/,
                         message: 'invalid first name',
                       },
                     })}
@@ -88,9 +48,9 @@ function Order() {
                     name="lastname"
                     placeholder="Doe"
                     ref={register({
-                      required: true,
+                      required: 'invalid last name',
                       pattern: {
-                        value: /^[A-Za-z]+$/,
+                        value: /^[a-zA-Z ]{2,30}$/,
                         message: 'invalid last name',
                       },
                     })}
@@ -103,7 +63,7 @@ function Order() {
                     name="email"
                     placeholder="john@example.com"
                     ref={register({
-                      required: true,
+                      required: 'invalid email address',
                       pattern: {
                         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                         message: 'invalid email address',
@@ -118,9 +78,9 @@ function Order() {
                     name="address"
                     placeholder="542 W. 15th Street"
                     ref={register({
-                      required: true,
+                      required: 'invalid address',
                       pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        // value:  ,
                         message: 'invalid address',
                       },
                     })}
@@ -133,9 +93,9 @@ function Order() {
                     name="city"
                     placeholder="New York"
                     ref={register({
-                      required: true,
+                      required: 'invalid city',
                       pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        value: /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/,
                         message: 'invalid city',
                       },
                     })}
@@ -150,9 +110,9 @@ function Order() {
                         name="state"
                         placeholder="NY"
                         ref={register({
-                          required: true,
+                          required: 'invalid state',
                           pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            value: /^[A-Za-z]{2,}$/,
                             message: 'invalid state',
                           },
                         })}
@@ -167,9 +127,9 @@ function Order() {
                         name="zip"
                         placeholder="10001"
                         ref={register({
-                          required: true,
+                          required: 'invalid zip',
                           pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            value: /^([0-9]{5})$/,
                             message: 'invalid zip',
                           },
                         })}
@@ -189,11 +149,11 @@ function Order() {
                     type="text"
                     id="cname"
                     name="cardname"
-                    placeholder="John Еще Doe"
+                    placeholder="John Doe"
                     ref={register({
-                      required: true,
+                      required: 'invalid cardname',
                       pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        // value: ,
                         message: 'invalid cardname',
                       },
                     })}
@@ -204,11 +164,11 @@ function Order() {
                     type="text"
                     id="ccnum"
                     name="cardnumber"
-                    placeholder="1111-2222-3333-4444"
+                    placeholder="1111222233334444"
                     ref={register({
-                      required: true,
+                      required: 'invalid card number',
                       pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        value: /^[0-9]{16}$/,
                         message: 'invalid card number',
                       },
                     })}
@@ -219,11 +179,11 @@ function Order() {
                     type="text"
                     id="expmonth"
                     name="expmonth"
-                    placeholder="September"
+                    placeholder="05"
                     ref={register({
-                      required: true,
+                      required: 'invalid Exp Month',
                       pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        value: /^[0-9]{2}$/,
                         message: 'invalid Exp Month',
                       },
                     })}
@@ -236,11 +196,11 @@ function Order() {
                         type="text"
                         id="expyear"
                         name="expyear"
-                        placeholder="2018"
+                        placeholder="2022"
                         ref={register({
-                          required: true,
+                          required: 'invalid Exp Year',
                           pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            value: /^[0-9]{4}$/,
                             message: 'invalid Exp Year',
                           },
                         })}
@@ -255,9 +215,9 @@ function Order() {
                         name="cvv"
                         placeholder="352"
                         ref={register({
-                          required: true,
+                          required: 'invalid cvv',
                           pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            value: /^[0-9]{3}$/,
                             message: 'invalid cvv',
                           },
                         })}
@@ -284,11 +244,11 @@ function Order() {
                   </svg>
                   <span>Вернуться назад</span>
                 </Link>
-                <Link to="/order" className="button pay-btn">
-                  <span>Оформить заказ</span>
-                </Link>
+                
+                <button type="submit" className="button pay-btn">Оформить заказ</button>
+               
               </div>
-              <button type="submit">Submit</button>
+              
             </form>
           </div>
         </div>
