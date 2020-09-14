@@ -1,8 +1,6 @@
 import isoFetch from 'isomorphic-fetch';
 import { itemsLoadingAC, itemsErrorAC, itemsSetAC } from '../AC/itemsAC';
-import * as firebase from 'firebase';
 function itemsThunkAC(dispatch, category) {
-  var db = firebase.database().ref('items');
   return function () {
     dispatch(itemsLoadingAC());
     isoFetch(

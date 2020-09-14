@@ -4,21 +4,39 @@ import { Link } from 'react-router-dom';
 import logoCards from '../img/cards.png';
 import { useForm } from 'react-hook-form';
 import Button from '../components/Button';
-import Account from '../components/Account';
+import * as firebase from 'firebase';
 
 function Order() {
+  const db = firebase.database();
   const { totalPrice, totalCount, items } = useSelector(({ cart }) => cart);
   const itemsCart = Object.keys(items).map((key) => {
     return items[key].items[0];
   });
+  const [email, setEmail] = React.useState('');
+  const [fname, setFName] = React.useState('');
+  const [lname, setlName] = React.useState('');
+  const [adress, setArdess] = React.useState('');
+  const handleChangeFName = ({ target: { value } }) => {
+    setFName(value);
+  };
+  const handleChangeLName = ({ target: { value } }) => {
+    setlName(value);
+  };
+  const handleChangeEmail = ({ target: { value } }) => {
+    setEmail(value);
+  };
+  const handleChangeAdress = ({ target: { value } }) => {
+    setArdess(value);
+  };
   const { register, errors, handleSubmit } = useForm();
   const onChange = (data) => console.log(data);
+  const makeAnOrder = () => {
+    db.ref(`orders/${lname}/email`).push(email);
+    db.ref(`orders/${lname}/lname`).push(fname);
+    db.ref(`orders/${lname}/adress`).push(adress);
+  };
   return (
     <div>
-      <Account/>
-      <div className="sing_in">
-        <h2>Or</h2>
-      </div>
       <div className="row">
         <div className="col-75">
           <div className="container_order">
@@ -39,12 +57,13 @@ function Order() {
                         message: 'invalid first name',
                       },
                     })}
+                    onChange={handleChangeFName}
                   />
                   <div className="error">{errors.firstname && errors.firstname.message}</div>
                   <label forhtml="fname">Last Name</label>
                   <input
                     type="text"
-                    id="fname"
+                    id="lname"
                     name="lastname"
                     placeholder="Doe"
                     ref={register({
@@ -54,6 +73,7 @@ function Order() {
                         message: 'invalid last name',
                       },
                     })}
+                    onChange={handleChangeLName}
                   />
                   <div className="error">{errors.lastname && errors.lastname.message}</div>
                   <label forhtml="email">Email</label>
@@ -69,6 +89,7 @@ function Order() {
                         message: 'invalid email address',
                       },
                     })}
+                    onChange={handleChangeEmail}
                   />
                   <div className="error">{errors.email && errors.email.message}</div>
                   <label forhtml="adr">Address</label>
@@ -84,6 +105,7 @@ function Order() {
                         message: 'invalid address',
                       },
                     })}
+                    onChange={handleChangeAdress}
                   />
                   <div className="error">{errors.address && errors.address.message}</div>
                   <label forhtml="city">City</label>
@@ -244,11 +266,11 @@ function Order() {
                   </svg>
                   <span>Вернуться назад</span>
                 </Link>
-                
-                <button type="submit" className="button pay-btn">Оформить заказ</button>
-               
+
+                <button type="submit" className="button pay-btn" onClick={makeAnOrder}>
+                  Оформить заказ
+                </button>
               </div>
-              
             </form>
           </div>
         </div>
