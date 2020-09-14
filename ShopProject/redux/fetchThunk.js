@@ -2,13 +2,13 @@ import isoFetch from 'isomorphic-fetch';
 import { itemsLoadingAC, itemsErrorAC, itemsSetAC } from '../AC/itemsAC';
 import * as firebase from 'firebase';
 function itemsThunkAC(dispatch, category) {
-  var db= firebase.database().ref();
+  var db = firebase.database().ref('items');
   return function () {
     dispatch(itemsLoadingAC());
     isoFetch(
-      `https://ishop-57739.firebaseio.com/.json?${
-        category !== null ? (`orderBy="category"&equalTo=` + category) : ('orderBy="id"')
-    }&limitToFirst=9`,
+      `https://ishop-57739.firebaseio.com/items.json?${
+        category !== null ? `orderBy="category"&equalTo=` + category : 'orderBy="id"'
+      }&limitToFirst=9`,
     )
       .then((response) => {
         if (!response.ok) {

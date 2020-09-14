@@ -17,7 +17,7 @@ function Account() {
                 type="text"
                 id="email"
                 name="email"
-                placeholder="john@example.com"
+                placeholder="email"
                 ref={register({
                   required: 'invalid email address',
                   pattern: {
@@ -34,7 +34,7 @@ function Account() {
                 type="text"
                 id="password"
                 name="password"
-                placeholder="gzdfh45653453rdf"
+                placeholder="password"
                 ref={register({
                   required:
                     'at least 1 lowercase and 1 uppercase alphabetical, 1 numeric, 1 special characters, must be 6 characters or longer',
