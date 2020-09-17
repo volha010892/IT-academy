@@ -21,11 +21,14 @@ function Home() {
   const dispatch = useDispatch();
   const items = useSelector(({ items }) => items);
   const cartItems = useSelector(({ cart }) => cart.items);
-
+  const [limit, setPageNumber] = React.useState(1);
   const { sortBy, category } = useSelector(({ filters }) => filters);
   const [activeMobMenu, setActiveMobMenu] = React.useState(false);
-  React.useEffect(() => dispatch(itemsThunkAC(dispatch, category)), [sortBy, category]);
-
+  const numberOfPage = () => {
+    setPageNumber(limit+1);
+  };
+  
+  React.useEffect(() => dispatch(itemsThunkAC(dispatch, category, limit )), [sortBy, category, limit]);
   const onSelectCategory = React.useCallback((index) => {
     dispatch(setCategory(index));
   }, []);
@@ -48,9 +51,6 @@ function Home() {
     if (!path.includes(mobMenuRef.current)) {
       setActiveMobMenu(false);
     }
-  };
-  const showMore = () => {
-    
   };
   React.useEffect(() => {
     document.body.addEventListener('click', handleOutsideClick);
@@ -103,7 +103,7 @@ function Home() {
           ))}
       </div>
       <div className="cart cart--empty">
-        <Button onClick={showMore} className="button button--black">
+        <Button onClick={numberOfPage} className="button button--black">
           <span>Show more</span>
         </Button>
       </div>
