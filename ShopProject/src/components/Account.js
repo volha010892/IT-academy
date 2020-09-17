@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import * as firebase from 'firebase';
 function Account() {
   var db = firebase.database().ref('items');
-  console.log(db);
   const { register, errors, handleSubmit } = useForm();
   const onChange = (data) => console.log(data);
   const [email, setEmail] = React.useState('');
