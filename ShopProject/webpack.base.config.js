@@ -30,6 +30,10 @@ export default new Config().merge({
             presets: [['env', { modules: false }], 'stage-0', 'react'],
           },
         },
+      },{
+        test: /\.js$/,
+        loader: 'babel-loader',
+        enforce: 'pre'
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

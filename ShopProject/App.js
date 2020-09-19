@@ -23,10 +23,10 @@ const firebaseCongig = {
 firebase.initializeApp(firebaseCongig);
 const store = createStore(combinedReducer, applyMiddleware(thunk));
 ReactDOM.render(
-  <Router>
+  <HashRouter>
     <Provider store={store}>
       <MainPage />
     </Provider>
-  </Router>,
+  </HashRouter>,
   document.getElementById('container'),
 );
