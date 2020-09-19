@@ -797,6 +797,12 @@ body {
 .set_account{
   display:block;
 }
+.block__sing__form{
+  display:block;
+}
+.none__sing__form{
+  display:none;
+}
 .none_account{
   display:none;
 }

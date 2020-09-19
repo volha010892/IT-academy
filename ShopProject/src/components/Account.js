@@ -2,39 +2,71 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import * as firebase from 'firebase';
 function Account() {
-  var db = firebase.database().ref('items');
-  const { register, errors, handleSubmit } = useForm();
-  const onChange = (data) => console.log(data);
+  const { register, errors, handleSubmit } = useForm({
+    mode: 'onChange',
+  });
+
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [buttonNumber, setButtonNumber] = React.useState(0);
   const [hasAccount, setHasAccount] = React.useState(false);
-  const handleChangeEmail = ({ target: { value, id } }) => {
+  const [errorAut, setErrorAut] = React.useState(false);
+  const [isOpenSingForm, setIsOpenSingForm] = React.useState(false);
+  const handleChangeEmail = ({ target: { value } }) => {
     setEmail(value);
   };
-  const handleChangePassword = ({ target: { value, id } }) => {
+  const handleChangePassword = ({ target: { value } }) => {
     setPassword(value);
   };
-  const createAccount = () => {
-    /*  firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch((error) => console.log(error));*/
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((response) => setHasAccount(true))
-      .catch((error) => console.log(error));
+  const isOpenFormSingUp = () => {
+    setIsOpenSingForm(true);
+    setButtonNumber(1);
+  };
+  const isOpenFormSingIn = () => {
+    setIsOpenSingForm(true);
+    setErrorAut(false);
+    setButtonNumber(2);
+  };
+  const authorize = () => {
+    if (buttonNumber === 1) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .catch((error) => {
+          if (error.code === 'auth/email-already-in-use') {
+            setErrorAut(true);
+          }
+        });
+    }
+    if (buttonNumber === 2) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((response) => setHasAccount(true))
+        .catch((error) => (errorAutMessage = error.message));
+    }
   };
   return (
     <div className="account__container ">
+      <div
+        className={
+          isOpenSingForm ? 'sing_in_big none__sing__form' : 'sing_in_big block__sing__form'
+        }>
+        <button type="submit" onClick={isOpenFormSingUp} className="button ">
+          <b>SingUp</b>
+        </button>
+        <button type="submit" onClick={isOpenFormSingIn} className="button">
+          <b>SingIn</b>
+        </button>
+      </div>
       {hasAccount ? (
         <div className="sing_in">
-          <h2>Welcom, {}</h2>
+          <h2>Welcom, {email}</h2>
         </div>
       ) : (
-        <div >
-          <form onSubmit={handleSubmit(onChange)}>
-            <div className=" sing_in_big">
+        <div className={isOpenSingForm ? ' block__sing__form' : ' none__sing__form'}>
+          <div className="sing_in_big">
+            <form onSubmit={handleSubmit(authorize)}>
               <div className="sing_in_form">
                 <div>
                   <label forhtml="email">Email</label>
@@ -63,9 +95,9 @@ function Account() {
                     placeholder="password"
                     ref={register({
                       required:
-                        'at least 1 lowercase and 1 uppercase alphabetical, 1 numeric, 1 special characters, must be 6 characters or longer',
+                        'at least 1 lowercase and 1 uppercase alphabetical, 1 numeric, must be 6 characters or longer',
                       pattern: {
-                        value: /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/,
+                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
                         message:
                           'The string must contain at least 1 lowercase and 1 uppercase alphabetical, 1 numeric, 1 special characters, must be 6 characters or longer',
                       },
@@ -75,11 +107,19 @@ function Account() {
                   <div className="error">{errors.password && errors.password.message}</div>
                 </div>
               </div>
-              <button type="submit" onClick={createAccount} className="button">
+              {errorAut && (
+                <div>
+                <div className="error">The email address is already in use by another account.</div>
+                <button type="submit" onClick={isOpenFormSingIn} className="button">
+                <b>SingIn</b>
+              </button>
+              </div>
+              )}
+              <button type="submit" className="button">
                 <b>Continue</b>
               </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       )}
     </div>
